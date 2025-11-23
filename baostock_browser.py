@@ -252,25 +252,29 @@ with col1:
                             st.error(f"Query failed: {rs.error_msg}")
         
         elif api_function == "query_stock_basic":
-            code = st.text_input("Stock Code", value="sh.600000", help="Leave empty to query by name")
-            code_name = st.text_input("Stock Name", value="", help="Support fuzzy search")
+            code = st.text_input("Stock Code", value="", help="Leave empty to query all stocks")
+            code_name = st.text_input("Stock Name", value="", help="Support fuzzy search, leave empty to query all")
+            st.info("💡 Tip: Leave both fields empty to get all A-share stocks basic information")
             
             if st.button("Execute Query", type="primary"):
                 if login_baostock():
                     with st.spinner("Querying data..."):
-                        if code:
+                        # If both parameters are empty, query all stocks
+                        if not code and not code_name:
+                            rs = bs.query_stock_basic()
+                            query_desc = "All Stocks"
+                        elif code:
                             rs = bs.query_stock_basic(code=code)
-                        elif code_name:
-                            rs = bs.query_stock_basic(code_name=code_name)
+                            query_desc = f"Code: {code}"
                         else:
-                            st.error("Please provide either code or name")
-                            rs = None
+                            rs = bs.query_stock_basic(code_name=code_name)
+                            query_desc = f"Name: {code_name}"
                         
-                        if rs and rs.error_code == '0':
+                        if rs.error_code == '0':
                             df = result_to_dataframe(rs)
                             st.session_state.result_df = df
-                            st.session_state.query_info = f"Stock Basic: {code or code_name}"
-                        elif rs:
+                            st.session_state.query_info = f"Stock Basic Info - {query_desc}"
+                        else:
                             st.error(f"Query failed: {rs.error_msg}")
     
     # Macro Economy APIs
