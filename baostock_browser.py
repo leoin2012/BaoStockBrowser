@@ -237,13 +237,101 @@ def stock_selector(label="Stock Code", key=None, help_text="Select or search sto
 st.title("📈 BaoStock Data Browser")
 st.markdown("---")
 
-# Sidebar for API selection
-st.sidebar.title("API Interface Selection")
-api_category = st.sidebar.selectbox(
-    "Select API Category",
-    ["K-Line Data", "Dividend & Adjustment", "Financial Data", "Company Reports", 
-     "Security Info", "Macro Economy", "Sector Data"]
-)
+# Sidebar for API selection with expandable menu
+st.sidebar.title("📚 API Interface Selection")
+
+# Initialize session state for selected API
+if 'selected_api' not in st.session_state:
+    st.session_state.selected_api = None
+if 'selected_category' not in st.session_state:
+    st.session_state.selected_category = None
+
+# Define API structure with categories and functions
+API_STRUCTURE = {
+    "K-Line Data": {
+        "icon": "📊",
+        "apis": {
+            "query_history_k_data_plus": "历史K线数据，支持多种频率"
+        }
+    },
+    "Dividend & Adjustment": {
+        "icon": "💰",
+        "apis": {
+            "query_dividend_data": "分红信息",
+            "query_adjust_factor": "复权因子"
+        }
+    },
+    "Financial Data": {
+        "icon": "📈",
+        "apis": {
+            "query_profit_data": "季度盈利能力",
+            "query_operation_data": "季度营运能力",
+            "query_growth_data": "季度成长能力",
+            "query_balance_data": "季度偿债能力",
+            "query_cash_flow_data": "季度现金流量",
+            "query_dupont_data": "季度杜邦分析"
+        }
+    },
+    "Company Reports": {
+        "icon": "📋",
+        "apis": {
+            "query_performance_express_report": "业绩快报",
+            "query_forecast_report": "业绩预告"
+        }
+    },
+    "Security Info": {
+        "icon": "🔍",
+        "apis": {
+            "query_trade_dates": "交易日历",
+            "query_all_stock": "所有股票代码",
+            "query_stock_basic": "股票基本信息"
+        }
+    },
+    "Macro Economy": {
+        "icon": "🌐",
+        "apis": {
+            "query_deposit_rate_data": "存款利率",
+            "query_loan_rate_data": "贷款利率",
+            "query_required_reserve_ratio_data": "存款准备金率",
+            "query_money_supply_data_month": "月度货币供应量",
+            "query_money_supply_data_year": "年度货币供应量",
+            "query_shibor_data": "SHIBOR利率"
+        }
+    },
+    "Sector Data": {
+        "icon": "🏢",
+        "apis": {
+            "query_stock_industry": "行业分类",
+            "query_sz50_stocks": "上证50成分股",
+            "query_hs300_stocks": "沪深300成分股",
+            "query_zz500_stocks": "中证500成分股"
+        }
+    }
+}
+
+# Display API menu with expanders
+for category, info in API_STRUCTURE.items():
+    with st.sidebar.expander(f"{info['icon']} {category}", expanded=(st.session_state.selected_category == category)):
+        for api_name, api_desc in info['apis'].items():
+            # Create button for each API
+            button_label = f"{api_name} | {api_desc}"
+            if st.button(button_label, key=f"btn_{api_name}", use_container_width=True):
+                st.session_state.selected_api = api_name
+                st.session_state.selected_category = category
+                st.rerun()
+
+# Get current selections
+api_category = st.session_state.selected_category
+api_function = st.session_state.selected_api
+
+# Display current selection
+if api_category and api_function:
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("**当前选择：**")
+    st.sidebar.info(f"{API_STRUCTURE[api_category]['icon']} {api_category}\n\n🔹 {api_function}")
+else:
+    st.sidebar.markdown("---")
+    st.sidebar.info("👆 请从上方菜单选择一个API接口")
 
 # Main content area with two columns
 col1, col2 = st.columns([1, 2])
@@ -251,10 +339,28 @@ col1, col2 = st.columns([1, 2])
 with col1:
     st.subheader("Parameters")
     
-    # K-Line Data APIs
-    if api_category == "K-Line Data":
-        api_function = st.selectbox("Select Function", ["query_history_k_data_plus"])
+    # Check if API is selected
+    if not api_category or not api_function:
+        st.info("👈 请从左侧菜单选择一个API接口开始查询")
+        st.markdown("""
+        ### 使用说明
         
+        1. **选择API接口**：点击左侧菜单中的API分类，展开后选择具体的查询接口
+        2. **配置参数**：在此处输入查询所需的参数（已提供默认值）
+        3. **执行查询**：点击"执行查询"按钮获取数据
+        4. **查看结果**：查询结果将显示在右侧面板
+        5. **导出数据**：可以下载CSV格式的查询结果
+        
+        ### 功能特性
+        
+        - 🎯 **智能股票选择器**：支持搜索和一键刷新
+        - 📖 **字段说明提示**：鼠标悬停查看字段含义
+        - 📊 **数据可视化**：自动统计数值列
+        - 💾 **数据导出**：支持CSV格式下载
+        """)
+    
+    # K-Line Data APIs
+    elif api_category == "K-Line Data":
         if api_function == "query_history_k_data_plus":
             code = stock_selector("Stock Code", key="kline_code", help_text="Select stock for K-line data")
             if not code:
@@ -301,8 +407,6 @@ with col1:
     
     # Dividend & Adjustment APIs
     elif api_category == "Dividend & Adjustment":
-        api_function = st.selectbox("Select Function", ["query_dividend_data", "query_adjust_factor"])
-        
         if api_function == "query_dividend_data":
             code = stock_selector("Stock Code", key="dividend_code", help_text="Select stock for dividend data")
             if not code:
@@ -346,11 +450,6 @@ with col1:
     
     # Financial Data APIs
     elif api_category == "Financial Data":
-        api_function = st.selectbox("Select Function", [
-            "query_profit_data", "query_operation_data", "query_growth_data",
-            "query_balance_data", "query_cash_flow_data", "query_dupont_data"
-        ])
-        
         code = stock_selector("Stock Code", key="financial_code", help_text="Select stock for financial data")
         if not code:
             code = "sh.600000"  # Default value
@@ -382,10 +481,6 @@ with col1:
     
     # Company Reports APIs
     elif api_category == "Company Reports":
-        api_function = st.selectbox("Select Function", [
-            "query_performance_express_report", "query_forecast_report"
-        ])
-        
         code = stock_selector("Stock Code", key="report_code", help_text="Select stock for company reports")
         if not code:
             code = "sh.600000"  # Default value
@@ -417,10 +512,6 @@ with col1:
     
     # Security Info APIs
     elif api_category == "Security Info":
-        api_function = st.selectbox("Select Function", [
-            "query_trade_dates", "query_all_stock", "query_stock_basic"
-        ])
-        
         if api_function == "query_trade_dates":
             start_date_input = st.date_input("Start Date", value=datetime.now() - timedelta(days=30))
             end_date_input = st.date_input("End Date", value=datetime.now())
@@ -488,12 +579,6 @@ with col1:
     
     # Macro Economy APIs
     elif api_category == "Macro Economy":
-        api_function = st.selectbox("Select Function", [
-            "query_deposit_rate_data", "query_loan_rate_data", 
-            "query_required_reserve_ratio_data", "query_money_supply_data_month",
-            "query_money_supply_data_year", "query_shibor_data"
-        ])
-        
         if api_function in ["query_money_supply_data_month"]:
             start_date_str = st.text_input("Start Date (YYYY-MM)", value="2023-01")
             end_date_str = st.text_input("End Date (YYYY-MM)", value="2023-12")
@@ -531,11 +616,6 @@ with col1:
     
     # Sector Data APIs
     elif api_category == "Sector Data":
-        api_function = st.selectbox("Select Function", [
-            "query_stock_industry", "query_sz50_stocks", 
-            "query_hs300_stocks", "query_zz500_stocks"
-        ])
-        
         if api_function == "query_stock_industry":
             code = stock_selector("Stock Code (optional)", key="industry_code", help_text="Select stock or leave empty for all")
             date_input = st.date_input("Query Date", value=datetime.now())
