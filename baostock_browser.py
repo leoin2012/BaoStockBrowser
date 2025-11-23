@@ -21,6 +21,10 @@ if 'stock_list' not in st.session_state:
 if 'stock_list_loaded' not in st.session_state:
     st.session_state.stock_list_loaded = False
 
+# Initialize session state for field descriptions
+if 'field_descriptions' not in st.session_state:
+    st.session_state.field_descriptions = None
+
 # Login to baostock
 def login_baostock():
     if not st.session_state.logged_in:
@@ -50,6 +54,7 @@ def result_to_dataframe(rs):
 
 # Stock list management
 STOCK_LIST_FILE = "stock_list.csv"
+FIELD_DESC_FILE = "field_descriptions.csv"
 
 def load_stock_list_from_file():
     """Load stock list from local CSV file"""
@@ -96,6 +101,101 @@ def get_stock_list():
     
     # If no file exists, refresh from API
     return refresh_stock_list()
+
+def load_field_descriptions():
+    """Load field descriptions from CSV file"""
+    if st.session_state.field_descriptions is None:
+        if os.path.exists(FIELD_DESC_FILE):
+            try:
+                df = pd.read_csv(FIELD_DESC_FILE, encoding='utf-8-sig')
+                # Create a dictionary for quick lookup: {field_name: (description, detail)}
+                desc_dict = {}
+                for _, row in df.iterrows():
+                    desc_dict[row['field_name']] = {
+                        'category': row['api_category'],
+                        'description': row['field_description'],
+                        'detail': row['field_detail']
+                    }
+                st.session_state.field_descriptions = desc_dict
+                return desc_dict
+            except Exception as e:
+                st.warning(f"Failed to load field descriptions: {e}")
+                return {}
+        else:
+            st.warning(f"Field description file not found: {FIELD_DESC_FILE}")
+            return {}
+    return st.session_state.field_descriptions
+
+def get_field_tooltip(field_name):
+    """Get tooltip text for a field"""
+    field_desc = load_field_descriptions()
+    if field_name in field_desc:
+        info = field_desc[field_name]
+        tooltip = f"**{info['description']}**"
+        if info['detail']:
+            tooltip += f"\n\n{info['detail']}"
+        return tooltip
+    return field_name
+
+def display_dataframe_with_tooltips(df, api_category=""):
+    """Display dataframe with column tooltips"""
+    if df.empty:
+        st.info("No data to display")
+        return
+    
+    # Load field descriptions
+    field_desc = load_field_descriptions()
+    
+    # Create column configuration with help text for tooltips
+    column_config = {}
+    for col_name in df.columns:
+        if col_name in field_desc:
+            info = field_desc[col_name]
+            # Combine description and detail for tooltip
+            help_text = info['description']
+            if info['detail']:
+                help_text += f"\n{info['detail']}"
+            
+            column_config[col_name] = st.column_config.TextColumn(
+                col_name,
+                help=help_text,
+                width="medium"
+            )
+        else:
+            column_config[col_name] = st.column_config.TextColumn(
+                col_name,
+                help=f"{col_name} (No description available)",
+                width="medium"
+            )
+    
+    # Display field descriptions in an expander (as backup reference)
+    with st.expander("📖 View All Field Descriptions", expanded=False):
+        cols_per_row = 2
+        columns = list(df.columns)
+        
+        for i in range(0, len(columns), cols_per_row):
+            cols = st.columns(cols_per_row)
+            for j, col_name in enumerate(columns[i:i+cols_per_row]):
+                with cols[j]:
+                    if col_name in field_desc:
+                        info = field_desc[col_name]
+                        st.markdown(f"**`{col_name}`**")
+                        st.caption(f"📝 {info['description']}")
+                        if info['detail']:
+                            st.caption(f"ℹ️ {info['detail']}")
+                    else:
+                        st.markdown(f"**`{col_name}`**")
+                        st.caption("No description available")
+                    st.markdown("---")
+    
+    # Display the dataframe with column configuration
+    st.dataframe(
+        df, 
+        column_config=column_config,
+        use_container_width=True, 
+        height=400,
+        hide_index=True
+    )
 
 def stock_selector(label="Stock Code", key=None, help_text="Select or search stock"):
     """Create a searchable stock selector with refresh button"""
@@ -482,8 +582,8 @@ with col2:
         st.info(f"Query: {st.session_state.query_info}")
         st.write(f"Total Records: {len(st.session_state.result_df)}")
         
-        # Display dataframe
-        st.dataframe(st.session_state.result_df, use_container_width=True, height=400)
+        # Display dataframe with tooltips
+        display_dataframe_with_tooltips(st.session_state.result_df, api_category)
         
         # Download button
         csv = st.session_state.result_df.to_csv(index=False).encode('utf-8-sig')

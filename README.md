@@ -10,6 +10,12 @@
   - 一键刷新按钮（🔄）更新股票列表
   - 自动缓存到本地CSV文件，无需每次重新加载
   - 首次使用自动从API获取完整股票列表
+- **📖 字段说明提示**：
+  - 所有查询结果表格字段都有详细的中文说明
+  - 点击"View Field Descriptions"展开查看所有字段含义
+  - 包含字段描述、计算公式、单位等详细信息
+  - 字段定义保存在本地CSV文件（field_descriptions.csv）
+  - 支持自定义扩展字段说明
 - **K线数据**：查询历史股票K线数据（日线、周线、月线和分钟级别）
 - **分红送股与复权**：获取分红信息和复权因子
 - **财务数据**：查询季度财务报表，包括：
@@ -121,6 +127,16 @@ streamlit run baostock_browser.py
 - `query_sz50_stocks`：上证50成分股
 - `query_hs300_stocks`：沪深300成分股
 - `query_zz500_stocks`：中证500成分股
+
+## 项目文件
+
+- `baostock_browser.py`: 主程序文件
+- `requirements.txt`: Python依赖包列表
+- `run.bat`: Windows一键启动脚本
+- `field_descriptions.csv`: 字段说明数据库（包含所有API字段的中文描述）
+- `stock_list.csv`: 股票列表缓存文件（首次运行后自动生成）
+- `README.md`: 项目说明文档（中文）
+- `README_EN.md`: 项目说明文档（英文）
 
 ## 系统要求
 

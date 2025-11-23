@@ -4,10 +4,21 @@ A comprehensive web-based tool for querying BaoStock API data with an intuitive 
 
 ## Features
 
+- **🎯 Smart Stock Selector**:
+  - Dropdown list showing all queryable stocks (code + name)
+  - Support keyword search for quick stock location
+  - One-click refresh button (🔄) to update stock list
+  - Auto-cache to local CSV file, no need to reload every time
+  - First-time use automatically fetches complete stock list from API
+- **📖 Field Description Tooltips**:
+  - All query result table fields have detailed Chinese descriptions
+  - Click "View Field Descriptions" to expand and view all field meanings
+  - Includes field descriptions, calculation formulas, units, and other detailed information
+  - Field definitions saved in local CSV file (field_descriptions.csv)
+  - Support custom extension of field descriptions
 - **K-Line Data**: Query historical stock K-line data (daily, weekly, monthly, and minute-level)
-- **Dividend & Adjustment**: Access dividend information and adjustment factors
-- **Financial Data**: Query quarterly financial reports including:
-  - Profitability metrics
+- **Dividend & Adjustment**: Get dividend information and adjustment factors
+- **Financial Data**: Query quarterly financial statements including:  - Profitability metrics
   - Operating capability
   - Growth ability
   - Debt repayment ability
@@ -110,13 +121,22 @@ Simply click "Execute Query" to get data immediately, then modify parameters as 
 - `query_hs300_stocks`: CSI 300 constituent stocks
 - `query_zz500_stocks`: CSI 500 constituent stocks
 
-## Requirements
+## Project Files
+
+- `baostock_browser.py`: Main program file
+- `requirements.txt`: Python dependencies list
+- `run.bat`: Windows one-click startup script
+- `field_descriptions.csv`: Field description database (contains Chinese descriptions of all API fields)
+- `stock_list.csv`: Stock list cache file (automatically generated after first run)
+- `README.md`: Project documentation (Chinese)
+- `README_EN.md`: Project documentation (English)
+
+## System Requirements
 
 - Python 3.7+
 - streamlit >= 1.28.0
 - baostock >= 0.8.8
 - pandas >= 2.0.0
-
 ## Data Source
 
 All data is provided by [BaoStock](http://www.baostock.com), a free and open-source securities data platform.
