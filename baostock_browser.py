@@ -2,6 +2,7 @@ import streamlit as st
 import baostock as bs
 import pandas as pd
 from datetime import datetime, timedelta
+import os
 
 # Page configuration
 st.set_page_config(
@@ -13,6 +14,12 @@ st.set_page_config(
 # Initialize session state for login
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
+
+# Initialize session state for stock list
+if 'stock_list' not in st.session_state:
+    st.session_state.stock_list = None
+if 'stock_list_loaded' not in st.session_state:
+    st.session_state.stock_list_loaded = False
 
 # Login to baostock
 def login_baostock():
@@ -41,6 +48,91 @@ def result_to_dataframe(rs):
         return pd.DataFrame(data_list, columns=rs.fields)
     return pd.DataFrame()
 
+# Stock list management
+STOCK_LIST_FILE = "stock_list.csv"
+
+def load_stock_list_from_file():
+    """Load stock list from local CSV file"""
+    if os.path.exists(STOCK_LIST_FILE):
+        try:
+            df = pd.read_csv(STOCK_LIST_FILE, encoding='utf-8-sig')
+            return df
+        except Exception as e:
+            st.warning(f"Failed to load stock list from file: {e}")
+    return None
+
+def refresh_stock_list():
+    """Refresh stock list from BaoStock API"""
+    if login_baostock():
+        with st.spinner("Refreshing stock list from BaoStock API..."):
+            rs = bs.query_stock_basic()
+            if rs.error_code == '0':
+                df = result_to_dataframe(rs)
+                if not df.empty:
+                    # Save to local file
+                    df.to_csv(STOCK_LIST_FILE, index=False, encoding='utf-8-sig')
+                    st.session_state.stock_list = df
+                    st.session_state.stock_list_loaded = True
+                    st.success(f"✅ Stock list refreshed! Total {len(df)} stocks loaded.")
+                    return df
+                else:
+                    st.error("No stock data returned")
+            else:
+                st.error(f"Failed to refresh stock list: {rs.error_msg}")
+    return None
+
+def get_stock_list():
+    """Get stock list (from cache, file, or API)"""
+    # If already loaded in session, return it
+    if st.session_state.stock_list is not None:
+        return st.session_state.stock_list
+    
+    # Try to load from file
+    df = load_stock_list_from_file()
+    if df is not None:
+        st.session_state.stock_list = df
+        st.session_state.stock_list_loaded = True
+        return df
+    
+    # If no file exists, refresh from API
+    return refresh_stock_list()
+
+def stock_selector(label="Stock Code", key=None, help_text="Select or search stock"):
+    """Create a searchable stock selector with refresh button"""
+    col_select, col_refresh = st.columns([4, 1])
+    
+    with col_refresh:
+        st.write("")  # Add spacing
+        if st.button("🔄", key=f"refresh_{key}", help="Refresh stock list"):
+            refresh_stock_list()
+    
+    with col_select:
+        stock_list = get_stock_list()
+        
+        if stock_list is not None and not stock_list.empty:
+            # Create display options: "code - name"
+            stock_list['display'] = stock_list['code'] + ' - ' + stock_list['code_name']
+            options = [''] + stock_list['display'].tolist()
+            
+            selected = st.selectbox(
+                label,
+                options=options,
+                key=key,
+                help=help_text
+            )
+            
+            # Extract code from selection
+            if selected:
+                code = selected.split(' - ')[0]
+                return code
+            return ""
+        else:
+            # Fallback to text input if stock list not available
+            st.warning("Stock list not loaded. Using text input.")
+            return st.text_input(label, value="", key=key, help=help_text)
+    
+    return ""
+
 # Main title
 st.title("📈 BaoStock Data Browser")
 st.markdown("---")
@@ -64,7 +156,9 @@ with col1:
         api_function = st.selectbox("Select Function", ["query_history_k_data_plus"])
         
         if api_function == "query_history_k_data_plus":
-            code = st.text_input("Stock Code", value="sh.600000", help="Format: sh.600000 or sz.000001")
+            code = stock_selector("Stock Code", key="kline_code", help_text="Select stock for K-line data")
+            if not code:
+                code = "sh.600000"  # Default value
             
             frequency = st.selectbox("Frequency", ["d", "w", "m", "5", "15", "30", "60"], 
                                     index=0, help="d=daily, w=weekly, m=monthly, 5/15/30/60=minutes")
@@ -110,7 +204,9 @@ with col1:
         api_function = st.selectbox("Select Function", ["query_dividend_data", "query_adjust_factor"])
         
         if api_function == "query_dividend_data":
-            code = st.text_input("Stock Code", value="sh.600000")
+            code = stock_selector("Stock Code", key="dividend_code", help_text="Select stock for dividend data")
+            if not code:
+                code = "sh.600000"  # Default value
             year = st.text_input("Year", value="2023")
             yearType = st.selectbox("Year Type", ["report", "operate"], 
                                    help="report=Report year, operate=Operation year")
@@ -127,7 +223,9 @@ with col1:
                             st.error(f"Query failed: {rs.error_msg}")
         
         elif api_function == "query_adjust_factor":
-            code = st.text_input("Stock Code", value="sh.600000")
+            code = stock_selector("Stock Code", key="adjust_code", help_text="Select stock for adjust factor")
+            if not code:
+                code = "sh.600000"  # Default value
             start_date_input = st.date_input("Start Date", value=datetime.now() - timedelta(days=365))
             end_date_input = st.date_input("End Date", value=datetime.now())
             
@@ -153,7 +251,9 @@ with col1:
             "query_balance_data", "query_cash_flow_data", "query_dupont_data"
         ])
         
-        code = st.text_input("Stock Code", value="sh.600000")
+        code = stock_selector("Stock Code", key="financial_code", help_text="Select stock for financial data")
+        if not code:
+            code = "sh.600000"  # Default value
         year = st.number_input("Year", min_value=2000, max_value=datetime.now().year, value=2023)
         quarter = st.selectbox("Quarter", [1, 2, 3, 4], index=0)
         
@@ -186,7 +286,9 @@ with col1:
             "query_performance_express_report", "query_forecast_report"
         ])
         
-        code = st.text_input("Stock Code", value="sh.600000")
+        code = stock_selector("Stock Code", key="report_code", help_text="Select stock for company reports")
+        if not code:
+            code = "sh.600000"  # Default value
         start_date_input = st.date_input("Start Date", value=datetime.now() - timedelta(days=365))
         end_date_input = st.date_input("End Date", value=datetime.now())
         
@@ -252,8 +354,15 @@ with col1:
                             st.error(f"Query failed: {rs.error_msg}")
         
         elif api_function == "query_stock_basic":
-            code = st.text_input("Stock Code", value="", help="Leave empty to query all stocks")
-            code_name = st.text_input("Stock Name", value="", help="Support fuzzy search, leave empty to query all")
+            use_selector = st.checkbox("Use stock selector", value=False, help="Check to use dropdown selector")
+            
+            if use_selector:
+                code = stock_selector("Stock Code", key="basic_code", help_text="Select stock for basic info")
+                code_name = ""
+            else:
+                code = st.text_input("Stock Code", value="", help="Leave empty to query all stocks")
+                code_name = st.text_input("Stock Name", value="", help="Support fuzzy search, leave empty to query all")
+            
             st.info("💡 Tip: Leave both fields empty to get all A-share stocks basic information")
             
             if st.button("Execute Query", type="primary"):
@@ -328,7 +437,7 @@ with col1:
         ])
         
         if api_function == "query_stock_industry":
-            code = st.text_input("Stock Code (optional)", value="", help="Leave empty to query all")
+            code = stock_selector("Stock Code (optional)", key="industry_code", help_text="Select stock or leave empty for all")
             date_input = st.date_input("Query Date", value=datetime.now())
             
             if st.button("Execute Query", type="primary"):
