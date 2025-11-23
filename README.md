@@ -30,6 +30,8 @@
 - **宏观经济**：利率、存款准备金率、货币供应量和SHIBOR数据
 - **板块数据**：行业分类和指数成分股（上证50、沪深300、中证500）
 
+<img width="3840" height="1906" alt="image" src="https://github.com/user-attachments/assets/438f87eb-29f5-40a6-8f4d-f5e093bf53e3" />
+
 ## 安装
 
 1. 克隆此仓库或下载文件
