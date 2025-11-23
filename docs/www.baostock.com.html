@@ -1,0 +1,3562 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://www.baostock.com/mainContent?file=pythonAPI.md -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <link rel="icon" href="http://www.baostock.com/bitbug_favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>www.baostock.com</title>
+    <style>
+      #adOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+      }
+      #adContent {
+        border-radius: 5px;
+        position: relative;
+        max-width: 80%;
+        max-height: 80%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background: transparent;
+        padding: 0;
+      }
+      #closeAd {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 24px;
+        color: #fff;
+        background: rgba(0,0,0,0.5);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+      }
+      .ad-image {
+        max-width: 100%;
+        max-height: 70%;
+        object-fit: contain;
+      }
+      .ad-image.full-size {
+        max-height: none;
+        max-width: none;
+        object-fit: contain;
+      }
+      .ad-text-container {
+        margin-top: 15px;
+        text-align: center;
+        background: white;
+        padding: 20px;
+      }
+      .ad-title {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #333;
+      }
+      .ad-description {
+        text-align: center;
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 15px;
+      }
+    </style>
+    <script src="./www.baostock.com_files/hm.js.下载"></script><script type="module" crossorigin="" src="./www.baostock.com_files/index-ijV9L1VO.js.下载"></script>
+    <link rel="stylesheet" crossorigin="" href="./www.baostock.com_files/index-MXupltwq.css">
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?9d07072ee9b9c164e826034579cce032";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script></head>
+  <body>
+    <div id="adOverlay">
+      <div id="adContent">
+        <span id="closeAd">×</span>
+        <div id="adContainer"></div>
+      </div>
+    </div>
+    <div id="app" data-v-app=""><div class="app-wrapper"><header data-v-38c4b3a3="" class="app-header"><img data-v-38c4b3a3="" src="./www.baostock.com_files/download.png" alt="Download" class="download-icon"><div data-v-38c4b3a3="" class="banner-ad"><a data-v-38c4b3a3="" href="http://www.baostock.com/mainContent?file=pythonAPI.md#" class="banner-link"><img data-v-38c4b3a3="" src="./www.baostock.com_files/banner.png" alt="" class="banner-image full-height"><!----></a></div></header><div class="app-container"><div class="sidebar"><div class="sidebar-header"><img src="./www.baostock.com_files/wiki.png" alt="Wiki" class="wiki-icon"></div><ul class="menu-list"><li class="">平台介绍</li><li class="active">Python API文档</li><li class="">--A股K线数据</li><li class="">--PY开发资源</li><li class="">--指数数据</li><li class="">--估值指标(日频)</li><li class="">--除权除息信息</li><li class="">--复权因子信息</li><li class="">--季频盈利能力</li><li class="">--季频营运能力</li><li class="">--季频成长能力</li><li class="">--季频偿债能力</li><li class="">--季频现金流量</li><li class="">--季频杜邦指数</li><li class="">--季频业绩快报</li><li class="">--季频业绩预告</li><li class="">--证券基本资料</li><li class="">--存款利率</li><li class="">--贷款利率</li><li class="">--存款准备金率</li><li class="">--货币供应量</li><li class="">--货币供应量余额</li><li class="">--行业分类</li><li class="">--上证50成分股</li><li class="">--沪深300成分股</li><li class="">--中证500成分股</li><li class="">--其他API</li><li class="">公式与数据说明</li><li class="">数据调整记录</li><li class="">好文章</li><li class="">黑名单</li></ul></div><div class="content-area"><div data-v-645ad045="" class="main-content-wrapper"><div data-v-8c832009="" data-v-645ad045="" class="markdown-container"><div data-v-8c832009=""><div data-v-8c832009="" class="markdown-content"><h3>Python API文档</h3>
+<h2>目录</h2>
+<ul>
+<li>1 入门示例<ul>
+<li>1.1 HelloWorld</li>
+</ul>
+</li>
+<li>2 登录<ul>
+<li>2.1 login()</li>
+</ul>
+</li>
+<li>3 登出<ul>
+<li>3.1 logout()</li>
+</ul>
+</li>
+<li>4 获取历史A股K线数据<ul>
+<li>4.1 获取历史A股K线数据：query_history_k_data_plus()</li>
+<li>4.2 历史行情指标参数</li>
+</ul>
+</li>
+<li>5 查询除权除息信息<ul>
+<li>5.1 除权除息信息：query_dividend_data()</li>
+</ul>
+</li>
+<li>6 查询复权因子信息<ul>
+<li>6.1 复权因子：query_adjust_factor()</li>
+</ul>
+</li>
+<li>7 查询季频财务数据信息<ul>
+<li>7.1 季频盈利能力：query_profit_data()</li>
+<li>7.2 季频营运能力：query_operation_data()</li>
+<li>7.3 季频成长能力：query_growth_data()</li>
+<li>7.4 季频偿债能力：query_balance_data()</li>
+<li>7.5 季频现金流量：query_cash_flow_data()</li>
+<li>7.6 季频杜邦指数：query_dupont_data()</li>
+</ul>
+</li>
+<li>8 查询季频公司报告信息<ul>
+<li>8.1 季频公司业绩快报：query_performance_express_report()</li>
+<li>8.2 季频公司业绩预告：query_forecast_report()</li>
+</ul>
+</li>
+<li>9 获取证券元信息<ul>
+<li>9.1 交易日查询：query_trade_dates()</li>
+<li>9.2 证券代码查询：query_all_stock()</li>
+<li>9.3 证券基本资料：query_stock_basic()</li>
+</ul>
+</li>
+<li>10 宏观经济数据<ul>
+<li>10.1 存款利率：query_deposit_rate_data()</li>
+<li>10.2 贷款利率：query_loan_rate_data()</li>
+<li>10.3 存款准备金率：query_required_reserve_ratio_data()</li>
+<li>10.4 货币供应量：query_money_supply_data_month()</li>
+<li>10.5 货币供应量(年底余额)：query_money_supply_data_year()</li>
+<li>10.6 银行间同业拆放利率：query_shibor_data()</li>
+</ul>
+</li>
+<li>11 板块数据<ul>
+<li>11.1 行业分类：query_stock_industry()</li>
+<li>11.2 上证50成分股：query_sz50_stocks()</li>
+<li>11.3 沪深300成分股：query_hs300_stocks()</li>
+<li>11.4 中证500成分股：query_zz500_stocks()</li>
+</ul>
+</li>
+<li>12 示例程序<ul>
+<li>12.1 获取指定日期全部股票的日K线数据：query_history_k_data_plus()</li>
+</ul>
+</li>
+</ul>
+<h2>入门示例</h2>
+<h3>HelloWorld</h3>
+<p>此篇为平台入门示例，安装baostock后，可导入包运行此示例。示例数据：<a href="http://www.baostock.com/api/static/csv/history_k_data.xlsx"><button>下载</button></a></p>
+<pre><code class="language-python">
+import baostock as bs
+import pandas as pd
+
+#### 登陆系统 ####
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+#### 获取历史K线数据 ####
+# 详细指标参数，参见“历史行情指标参数”章节
+rs = bs.query_history_k_data_plus("sh.600000",
+    "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,peTTM,pbMRQ,psTTM,pcfNcfTTM,isST",
+    start_date='2017-06-01', end_date='2017-12-31', 
+    frequency="d", adjustflag="3") #frequency="d"取日k线，adjustflag="3"默认不复权
+print('query_history_k_data_plus respond error_code:'+rs.error_code)
+print('query_history_k_data_plus respond  error_msg:'+rs.error_msg)
+
+#### 打印结果集 ####
+data_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    data_list.append(rs.get_row_data())
+result = pd.DataFrame(data_list, columns=rs.fields)
+#### 结果集输出到csv文件 ####
+result.to_csv("D:/history_k_data.csv", encoding="gbk", index=False)
+print(result)
+
+#### 登出系统 ####
+bs.logout()
+
+</code></pre>
+<h2>登录</h2>
+<h3>login()</h3>
+<p>方法说明：登录系统。</p>
+<p>使用示例：lg = login()</p>
+<p>返回信息：</p>
+<ul>
+<li>lg.error_code：错误代码，当为“0”时表示成功，当为非0时表示失败；</li>
+<li>lg.error_msg：错误信息，对错误的详细解释。</li>
+</ul>
+<h2>登出</h2>
+<h3>logout()</h3>
+<p>方法说明：登出系统</p>
+<p>使用示例：lg = logout()</p>
+<p>返回信息：</p>
+<ul>
+<li>lg.error_code：错误代码，当为“0”时表示成功，当为非0时表示失败；</li>
+<li>lg.error_msg：错误信息，对错误的详细解释。</li>
+</ul>
+<h2>获取历史A股K线数据</h2>
+<h3>获取历史A股K线数据：query_history_k_data_plus()</h3>
+<p>方法说明：通过API接口获取A股历史交易数据，可以通过参数设置获取日k线、周k线、月k线，以及5分钟、15分钟、30分钟和60分钟k线数据，适合搭配均线数据进行选股和分析。</p>
+<p>返回类型：pandas的DataFrame类型。</p>
+<p>能获取1990-12-19至当前时间的数据；</p>
+<p>可查询不复权、<strong>前复权</strong>、<strong>后复权</strong>数据。</p>
+<p>示例数据：<a href="http://www.baostock.com/api/static/csv/history_A_stock_k_data.xlsx"><button>下载</button></a></p>
+<p>日线使用示例：</p>
+<pre><code class="language-python">
+import baostock as bs
+import pandas as pd
+
+#### 登陆系统 ####
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+#### 获取沪深A股历史K线数据 ####
+# 详细指标参数，参见“历史行情指标参数”章节；“分钟线”参数与“日线”参数不同。“分钟线”不包含指数。
+# 分钟线指标：date,time,code,open,high,low,close,volume,amount,adjustflag
+# 周月线指标：date,code,open,high,low,close,volume,amount,adjustflag,turn,pctChg
+rs = bs.query_history_k_data_plus("sh.600000",
+    "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST",
+    start_date='2024-07-01', end_date='2024-12-31',
+    frequency="d", adjustflag="3")
+print('query_history_k_data_plus respond error_code:'+rs.error_code)
+print('query_history_k_data_plus respond  error_msg:'+rs.error_msg)
+
+#### 打印结果集 ####
+data_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    data_list.append(rs.get_row_data())
+result = pd.DataFrame(data_list, columns=rs.fields)
+
+#### 结果集输出到csv文件 ####   
+result.to_csv("D:\\history_A_stock_k_data.csv", index=False)
+print(result)
+
+#### 登出系统 ####
+bs.logout()
+</code></pre>
+<p>分钟线使用示例：</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+#### 登陆系统 ####
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+#### 获取沪深A股历史K线数据 ####
+# 详细指标参数，参见“历史行情指标参数”章节；“分钟线”参数与“日线”参数不同。“分钟线”不包含指数。
+# 分钟线指标：date,time,code,open,high,low,close,volume,amount,adjustflag
+# 周月线指标：date,code,open,high,low,close,volume,amount,adjustflag,turn,pctChg
+rs = bs.query_history_k_data_plus("sh.600000",
+    "date,time,code,open,high,low,close,volume,amount,adjustflag",
+    start_date='2024-07-01', end_date='2024-12-31',
+    frequency="5", adjustflag="3")
+print('query_history_k_data_plus respond error_code:'+rs.error_code)
+print('query_history_k_data_plus respond  error_msg:'+rs.error_msg)
+
+#### 打印结果集 ####
+data_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    data_list.append(rs.get_row_data())
+result = pd.DataFrame(data_list, columns=rs.fields)
+
+#### 结果集输出到csv文件 ####   
+result.to_csv("D:\\history_A_stock_k_data.csv", index=False)
+print(result)
+
+#### 登出系统 ####
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。此参数不可为空；</li>
+<li>fields：指示简称，支持多指标输入，以半角逗号分隔，填写内容作为返回类型的列。<strong>详细指标列表见历史行情指标参数章节，日线与分钟线参数不同</strong>。此参数不可为空；</li>
+<li>start：开始日期（包含），格式“YYYY-MM-DD”，为空时取2015-01-01；</li>
+<li>end：结束日期（包含），格式“YYYY-MM-DD”，为空时取最近一个交易日；</li>
+<li>frequency：数据类型，默认为d，日k线；d=日k线、w=周、m=月、5=5分钟、15=15分钟、30=30分钟、60=60分钟k线数据，不区分大小写；指数没有分钟线数据；周线每周最后一个交易日才可以获取，月线每月最后一个交易日才可以获取。</li>
+<li>adjustflag：<strong>复权类型，默认不复权：3；1：后复权；2：前复权。已支持分钟线、日线、周线、月线前后复权。</strong> BaoStock提供的是<strong>涨跌幅复权算法</strong>复权因子，具体介绍见：<a href="http://www.baostock.com/api/static/pdf/BaoStock%E5%A4%8D%E6%9D%83%E5%9B%A0%E5%AD%90%E7%AE%80%E4%BB%8B.pdf" title="BaoStock复权因子简介.pdf">BaoStock复权因子简介</a>。</li>
+</ul>
+<p><strong>注意：</strong></p>
+<ul>
+<li>股票停牌时，对于日线，开、高、低、收价都相同，且都为前一交易日的收盘价，成交量、成交额为0，换手率为空。</li>
+</ul>
+<p>如果需要将换手率转为float类型，可使用如下方法转换：result["turn"] = [0 if x == "" else float(x) for x in result["turn"]]</p>
+<p><strong>关于复权数据的说明：</strong></p>
+<p>BaoStock使用“涨跌幅复权法”进行复权，详细说明参考上文“复权因子简介”。不同系统间采用复权方式可能不一致，导致数据不一致。</p>
+<p>“涨跌幅复权法的”优点：可以计算出资金收益率，确保初始投入的资金运用率为100%，既不会因为分红而导致投资减少，也不会因为配股导致投资增加。</p>
+<p>与同花顺、通达信等存在不同。</p>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>date</th>
+<th>code</th>
+<th>open</th>
+<th>high</th>
+<th>low</th>
+<th>close</th>
+<th>preclose</th>
+<th>volume</th>
+<th>amount</th>
+<th>adjustflag</th>
+<th>turn</th>
+<th>tradestatus</th>
+<th>pctChg</th>
+<th>isST</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2017-07-03</td>
+<td>sh.600000</td>
+<td>12.64</td>
+<td>12.65</td>
+<td>12.47</td>
+<td>12.56</td>
+<td>12.65</td>
+<td>38778949</td>
+<td>486264672</td>
+<td>3</td>
+<td>0.137985</td>
+<td>1</td>
+<td>-0.711456</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2017-07-04</td>
+<td>sh.600000</td>
+<td>12.55</td>
+<td>12.58</td>
+<td>12.41</td>
+<td>12.55</td>
+<td>12.56</td>
+<td>36659128</td>
+<td>458434432</td>
+<td>3</td>
+<td>0.130442</td>
+<td>1</td>
+<td>-0.07962</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2017-07-05</td>
+<td>sh.600000</td>
+<td>12.5</td>
+<td>12.65</td>
+<td>12.47</td>
+<td>12.62</td>
+<td>12.55</td>
+<td>26470507</td>
+<td>332542464</td>
+<td>3</td>
+<td>0.094188</td>
+<td>1</td>
+<td>0.557767</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2017-07-06</td>
+<td>sh.600000</td>
+<td>12.62</td>
+<td>12.72</td>
+<td>12.51</td>
+<td>12.66</td>
+<td>12.62</td>
+<td>37414241</td>
+<td>471582096</td>
+<td>3</td>
+<td>0.133129</td>
+<td>1</td>
+<td>0.316957</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2017-07-07</td>
+<td>sh.600000</td>
+<td>12.62</td>
+<td>12.69</td>
+<td>12.55</td>
+<td>12.6</td>
+<td>12.66</td>
+<td>24667294</td>
+<td>311101536</td>
+<td>3</td>
+<td>0.087772</td>
+<td>1</td>
+<td>-0.473929</td>
+<td>0</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>算法说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>date</td>
+<td>交易所行情日期</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>证券代码</td>
+<td></td>
+</tr>
+<tr>
+<td>open</td>
+<td>开盘价</td>
+<td></td>
+</tr>
+<tr>
+<td>high</td>
+<td>最高价</td>
+<td></td>
+</tr>
+<tr>
+<td>low</td>
+<td>最低价</td>
+<td></td>
+</tr>
+<tr>
+<td>close</td>
+<td>收盘价</td>
+<td></td>
+</tr>
+<tr>
+<td>preclose</td>
+<td>前收盘价</td>
+<td>见表格下方详细说明</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>成交量（累计，单位：股）</td>
+<td></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>成交额（单位：人民币元）</td>
+<td></td>
+</tr>
+<tr>
+<td>adjustflag</td>
+<td>复权状态（1：后复权，2：前复权，3：不复权）</td>
+<td></td>
+</tr>
+<tr>
+<td>turn</td>
+<td>换手率</td>
+<td>[指定交易日的成交量(股)/指定交易日的股票的流通股总数(股)]*100%</td>
+</tr>
+<tr>
+<td>tradestatus</td>
+<td>交易状态（1：正常交易，0：停牌）</td>
+<td></td>
+</tr>
+<tr>
+<td>pctChg</td>
+<td>涨跌幅（百分比）</td>
+<td>日涨跌幅=[(指定交易日的收盘价-指定交易日前收盘价)/指定交易日前收盘价]*100%</td>
+</tr>
+<tr>
+<td>peTTM</td>
+<td>滚动市盈率</td>
+<td>(指定交易日的股票收盘价/指定交易日的每股盈余TTM)=(指定交易日的股票收盘价*截至当日公司总股本)/归属母公司股东净利润TTM</td>
+</tr>
+<tr>
+<td>pbMRQ</td>
+<td>市净率</td>
+<td>(指定交易日的股票收盘价/指定交易日的每股净资产)=总市值/(最近披露的归属母公司股东的权益-其他权益工具)</td>
+</tr>
+<tr>
+<td>psTTM</td>
+<td>滚动市销率</td>
+<td>(指定交易日的股票收盘价/指定交易日的每股销售额)=(指定交易日的股票收盘价*截至当日公司总股本)/营业总收入TTM</td>
+</tr>
+<tr>
+<td>pcfNcfTTM</td>
+<td>滚动市现率</td>
+<td>(指定交易日的股票收盘价/指定交易日的每股现金流TTM)=(指定交易日的股票收盘价*截至当日公司总股本)/现金以及现金等价物净增加额TTM</td>
+</tr>
+<tr>
+<td>isST</td>
+<td>是否ST股,1：是，0：否</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<p><strong>注意“前收盘价”说明</strong>：</p>
+<p>证券在指定交易日行情数据的前收盘价，当日发生除权除息时，“前收盘价”不是前一天的实际收盘价，而是根据股权登记日收盘价与分红现金的数量、配送股的数里和配股价的高低等结合起来算出来的价格。</p>
+<p>具体计算方法如下:</p>
+<p>1、计算除息价:</p>
+<p>除息价=股息登记日的收盘价-每股所分红利现金额</p>
+<p>2、计算除权价:</p>
+<p>送红股后的除权价=股权登记日的收盘价/(1+每股送红股数)</p>
+<p>配股后的除权价=(股权登记日的收盘价+配股价*每股配股数)/(1+每股配股数)</p>
+<p>3、计算除权除息价</p>
+<p>除权除息价=(股权登记日的收盘价-每股所分红利现金额+配股价*每股配股数)/(1+每股送红股数+每股配股数)</p>
+<p>“前收盘价”由交易所计算并公布。首发日的“前收盘价”等于“首发价格”。</p>
+<h3>历史行情指标参数</h3>
+<p>日线指标参数（包含停牌证券）</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>date</td>
+<td>交易所行情日期</td>
+<td>格式：YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>code</td>
+<td>证券代码</td>
+<td>格式：sh.600000。sh：上海，sz：深圳</td>
+</tr>
+<tr>
+<td>open</td>
+<td>今开盘价格</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>high</td>
+<td>最高价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>low</td>
+<td>最低价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>close</td>
+<td>今收盘价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>preclose</td>
+<td>昨日收盘价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>成交数量</td>
+<td>单位：股</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>成交金额</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>adjustflag</td>
+<td>复权状态</td>
+<td>不复权、前复权、后复权</td>
+</tr>
+<tr>
+<td>turn</td>
+<td>换手率</td>
+<td>精度：小数点后6位；单位：%</td>
+</tr>
+<tr>
+<td>tradestatus</td>
+<td>交易状态</td>
+<td>1：正常交易 0：停牌</td>
+</tr>
+<tr>
+<td>pctChg</td>
+<td>涨跌幅（百分比）</td>
+<td>精度：小数点后6位</td>
+</tr>
+<tr>
+<td>peTTM</td>
+<td>滚动市盈率</td>
+<td>精度：小数点后6位</td>
+</tr>
+<tr>
+<td>psTTM</td>
+<td>滚动市销率</td>
+<td>精度：小数点后6位</td>
+</tr>
+<tr>
+<td>pcfNcfTTM</td>
+<td>滚动市现率</td>
+<td>精度：小数点后6位</td>
+</tr>
+<tr>
+<td>pbMRQ</td>
+<td>市净率</td>
+<td>精度：小数点后6位</td>
+</tr>
+<tr>
+<td>isST</td>
+<td>是否ST</td>
+<td>1是，0否</td>
+</tr>
+</tbody></table></div>
+<p>周、月线指标参数</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>说明</th>
+<th>算法说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>date</td>
+<td>交易所行情日期</td>
+<td>格式：YYYY-MM-DD</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>证券代码</td>
+<td>格式：sh.600000。sh：上海，sz：深圳</td>
+<td></td>
+</tr>
+<tr>
+<td>open</td>
+<td>开盘价格</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+<td></td>
+</tr>
+<tr>
+<td>high</td>
+<td>最高价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+<td></td>
+</tr>
+<tr>
+<td>low</td>
+<td>最低价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+<td></td>
+</tr>
+<tr>
+<td>close</td>
+<td>收盘价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+<td></td>
+</tr>
+<tr>
+<td>volume</td>
+<td>成交数量</td>
+<td>单位：股</td>
+<td></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>成交金额</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+<td></td>
+</tr>
+<tr>
+<td>adjustflag</td>
+<td>复权状态</td>
+<td>不复权、前复权、后复权</td>
+<td></td>
+</tr>
+<tr>
+<td>turn</td>
+<td>换手率</td>
+<td>精度：小数点后6位；单位：%</td>
+<td></td>
+</tr>
+<tr>
+<td>pctChg</td>
+<td>涨跌幅（百分比）</td>
+<td>精度：小数点后6位</td>
+<td>涨跌幅=[(区间最后交易日收盘价-区间首个交易日前收盘价)/区间首个交易日前收盘价]*100%</td>
+</tr>
+</tbody></table></div>
+<p>5、15、30、60分钟线指标参数(不包含指数)</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>date</td>
+<td>交易所行情日期</td>
+<td>格式：YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>time</td>
+<td>交易所行情时间</td>
+<td>格式：YYYYMMDDHHMMSSsss</td>
+</tr>
+<tr>
+<td>code</td>
+<td>证券代码</td>
+<td>格式：sh.600000。sh：上海，sz：深圳</td>
+</tr>
+<tr>
+<td>open</td>
+<td>开盘价格</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>high</td>
+<td>最高价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>low</td>
+<td>最低价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>close</td>
+<td>收盘价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>成交数量</td>
+<td>单位：股； 时间范围内的累计成交数量</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>成交金额</td>
+<td>精度：小数点后4位；单位：人民币元； 时间范围内的累计成交金额</td>
+</tr>
+<tr>
+<td>adjustflag</td>
+<td>复权状态</td>
+<td>不复权、前复权、后复权</td>
+</tr>
+</tbody></table></div>
+<h2>查询除权除息信息</h2>
+<h3>除权除息信息：query_dividend_data()</h3>
+<p>通过API接口获取除权除息信息数据（预披露、预案、正式都已通过）。示例数据：<a href="http://www.baostock.com/api/static/csv/history_Dividend_data.xlsx"><button>下载</button></a></p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+#### 登陆系统 ####
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+#### 查询除权除息信息####
+# 查询2015年除权除息信息
+rs_list = []
+rs_dividend_2015 = bs.query_dividend_data(code="sh.600000", year="2015", yearType="report")
+while (rs_dividend_2015.error_code == '0') &amp; rs_dividend_2015.next():
+    rs_list.append(rs_dividend_2015.get_row_data())
+
+# 查询2016年除权除息信息
+rs_dividend_2016 = bs.query_dividend_data(code="sh.600000", year="2016", yearType="report")
+while (rs_dividend_2016.error_code == '0') &amp; rs_dividend_2016.next():
+    rs_list.append(rs_dividend_2016.get_row_data())
+
+# 查询2017年除权除息信息
+rs_dividend_2017 = bs.query_dividend_data(code="sh.600000", year="2017", yearType="report")
+while (rs_dividend_2017.error_code == '0') &amp; rs_dividend_2017.next():
+    rs_list.append(rs_dividend_2017.get_row_data())
+
+result_dividend = pd.DataFrame(rs_list, columns=rs_dividend_2017.fields)
+# 打印输出
+print(result_dividend)
+
+#### 结果集输出到csv文件 ####   
+result_dividend.to_csv("D:\\history_Dividend_data.csv", encoding="gbk",index=False)
+
+#### 登出系统 ####
+bs.logout()
+
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。此参数不可为空；</li>
+<li>year：年份，如：2017。此参数不可为空；</li>
+<li>yearType：年份类别，默认为"report":预案公告年份，可选项"operate":除权除息年份。此参数不可为空。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>dividPreNoticeDate</th>
+<th>dividAgmPumDate</th>
+<th>dividPlanAnnounceDate</th>
+<th>dividPlanDate</th>
+<th>dividRegistDate</th>
+<th>dividOperateDate</th>
+<th>dividPayDate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sh.600000</td>
+<td></td>
+<td>2015-05-16</td>
+<td>2015-03-19</td>
+<td>2015-06-16</td>
+<td>2015-06-19</td>
+<td>2015-06-23</td>
+<td>2015-06-23</td>
+</tr>
+<tr>
+<td>sh.600000</td>
+<td></td>
+<td>2016-04-29</td>
+<td>2016-04-07</td>
+<td>2016-06-16</td>
+<td>2016-06-22</td>
+<td>2016-06-23</td>
+<td>2016-06-23</td>
+</tr>
+<tr>
+<td>sh.600000</td>
+<td></td>
+<td>2017-04-26</td>
+<td>2017-04-01</td>
+<td>2017-05-19</td>
+<td>2017-05-24</td>
+<td>2017-05-25</td>
+<td>2017-05-25</td>
+</tr>
+</tbody></table></div>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>dividStockMarketDate</th>
+<th>dividCashPsBeforeTax</th>
+<th>dividCashPsAfterTax</th>
+<th>dividStocksPs</th>
+<th>dividCashStock</th>
+<th>dividReserveToStockPs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>0.757</td>
+<td>0.6813或0.71915</td>
+<td>0.000000</td>
+<td>10派7.57元（含税，扣税后6.813或7.1915元）</td>
+<td></td>
+</tr>
+<tr>
+<td>2016-06-24</td>
+<td>0.515</td>
+<td>0.4635或0.515</td>
+<td>0.000000</td>
+<td>10转1派5.15元（含税，扣税后4.635或5.15元）</td>
+<td>0.100000</td>
+</tr>
+<tr>
+<td>2017-05-26</td>
+<td>0.2</td>
+<td>0.18或0.2</td>
+<td>0.000000</td>
+<td>10转3派2元（含税，扣税后1.8或2元）</td>
+<td>0.300000</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>算法说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>证券代码</td>
+<td></td>
+</tr>
+<tr>
+<td>dividPreNoticeDate</td>
+<td>预批露公告日</td>
+<td></td>
+</tr>
+<tr>
+<td>dividAgmPumDate</td>
+<td>股东大会公告日期</td>
+<td></td>
+</tr>
+<tr>
+<td>dividPlanAnnounceDate</td>
+<td>预案公告日</td>
+<td></td>
+</tr>
+<tr>
+<td>dividPlanDate</td>
+<td>分红实施公告日</td>
+<td></td>
+</tr>
+<tr>
+<td>dividRegistDate</td>
+<td>股权登记告日</td>
+<td></td>
+</tr>
+<tr>
+<td>dividOperateDate</td>
+<td>除权除息日期</td>
+<td></td>
+</tr>
+<tr>
+<td>dividPayDate</td>
+<td>派息日</td>
+<td></td>
+</tr>
+<tr>
+<td>dividStockMarketDate</td>
+<td>红股上市交易日</td>
+<td></td>
+</tr>
+<tr>
+<td>dividCashPsBeforeTax</td>
+<td>每股股利税前</td>
+<td>派息比例分子(税前)/派息比例分母</td>
+</tr>
+<tr>
+<td>dividCashPsAfterTax</td>
+<td>每股股利税后</td>
+<td>派息比例分子(税后)/派息比例分母</td>
+</tr>
+<tr>
+<td>dividStocksPs</td>
+<td>每股红股</td>
+<td></td>
+</tr>
+<tr>
+<td>dividCashStock</td>
+<td>分红送转</td>
+<td>每股派息数(税前)+每股送股数+每股转增股本数</td>
+</tr>
+<tr>
+<td>dividReserveToStockPs</td>
+<td>每股转增资本</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<h2>查询复权因子信息</h2>
+<h3>复权因子：query_adjust_factor()</h3>
+<p>通过API接口获取复权因子信息数据。示例数据：<a href="http://www.baostock.com/api/static/csv/adjust_factor_data.xlsx"><button>下载</button></a></p>
+<p>BaoStock提供的是<strong>涨跌幅复权算法</strong>复权因子，具体介绍见： <a href="http://www.baostock.com/api/static/pdf/BaoStock%E5%A4%8D%E6%9D%83%E5%9B%A0%E5%AD%90%E7%AE%80%E4%BB%8B.pdf" title="BaoStock复权因子简介.pdf">媒体文件:BaoStock复权因子简介.pdf</a>。</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 查询2015至2017年复权因子
+rs_list = []
+rs_factor = bs.query_adjust_factor(code="sh.600000", start_date="2015-01-01", end_date="2017-12-31")
+while (rs_factor.error_code == '0') &amp; rs_factor.next():
+    rs_list.append(rs_factor.get_row_data())
+result_factor = pd.DataFrame(rs_list, columns=rs_factor.fields)
+# 打印输出
+print(result_factor)
+
+# 结果集输出到csv文件
+result_factor.to_csv("D:\\adjust_factor_data.csv", encoding="gbk", index=False)
+
+# 登出系统
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。此参数不可为空；</li>
+<li>start_date：开始日期，为空时默认为2015-01-01，包含此日期；</li>
+<li>end_date：结束日期，为空时默认当前日期，包含此日期。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>dividOperateDate</th>
+<th>foreAdjustFactor</th>
+<th>backAdjustFactor</th>
+<th>adjustFactor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sh.600000</td>
+<td>2015-06-23</td>
+<td>0.663792</td>
+<td>6.295967</td>
+<td>6.295967</td>
+</tr>
+<tr>
+<td>sh.600000</td>
+<td>2016-06-23</td>
+<td>0.751598</td>
+<td>7.128788</td>
+<td>7.128788</td>
+</tr>
+<tr>
+<td>sh.600000</td>
+<td>2017-05-25</td>
+<td>0.989551</td>
+<td>9.385732</td>
+<td>9.385732</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>算法说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>证券代码</td>
+<td></td>
+</tr>
+<tr>
+<td>dividOperateDate</td>
+<td>除权除息日期</td>
+<td></td>
+</tr>
+<tr>
+<td>foreAdjustFactor</td>
+<td>向前复权因子</td>
+<td>除权除息日前一个交易日的收盘价/除权除息日最近的一个交易日的前收盘价</td>
+</tr>
+<tr>
+<td>backAdjustFactor</td>
+<td>向后复权因子</td>
+<td>除权除息日最近的一个交易日的前收盘价/除权除息日前一个交易日的收盘价</td>
+</tr>
+<tr>
+<td>adjustFactor</td>
+<td>本次复权因子</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<h2>查询季频财务数据信息</h2>
+<h3>季频盈利能力：query_profit_data()</h3>
+<p>方法说明：通过API接口获取季频盈利能力信息，可以通过参数设置获取对应年份、季度数据，提供2007年至今数据。</p>
+<p>返回类型：pandas的DataFrame类型。</p>
+<p>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 查询季频估值指标盈利能力
+profit_list = []
+rs_profit = bs.query_profit_data(code="sh.600000", year=2017, quarter=2)
+while (rs_profit.error_code == '0') &amp; rs_profit.next():
+    profit_list.append(rs_profit.get_row_data())
+result_profit = pd.DataFrame(profit_list, columns=rs_profit.fields)
+# 打印输出
+print(result_profit)
+# 结果集输出到csv文件
+result_profit.to_csv("D:\\profit_data.csv", encoding="gbk", index=False)
+
+# 登出系统
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。此参数不可为空；</li>
+<li>year：统计年份，为空时默认当前年；</li>
+<li>quarter：统计季度，可为空，默认当前季度。不为空时只有4个取值：1，2，3，4。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>pubDate</th>
+<th>statDate</th>
+<th>roeAvg</th>
+<th>npMargin</th>
+<th>gpMargin</th>
+<th>netProfit</th>
+<th>epsTTM</th>
+<th>MBRevenue</th>
+<th>totalShare</th>
+<th>liqaShare</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sh.600000</td>
+<td>2017-08-30</td>
+<td>2017-06-30</td>
+<td>0.074617</td>
+<td>0.342179</td>
+<td></td>
+<td>28522000000.000000</td>
+<td>1.939029</td>
+<td>83354000000.000000</td>
+<td>28103763899.00</td>
+<td>28103763899.00</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>算法说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>证券代码</td>
+<td></td>
+</tr>
+<tr>
+<td>pubDate</td>
+<td>公司发布财报的日期</td>
+<td></td>
+</tr>
+<tr>
+<td>statDate</td>
+<td>财报统计的季度的最后一天, 比如2017-03-31, 2017-06-30</td>
+<td></td>
+</tr>
+<tr>
+<td>roeAvg</td>
+<td>净资产收益率(平均)(%)</td>
+<td>归属母公司股东净利润/[(期初归属母公司股东的权益+期末归属母公司股东的权益)/2]*100%</td>
+</tr>
+<tr>
+<td>npMargin</td>
+<td>销售净利率(%)</td>
+<td>净利润/营业收入*100%</td>
+</tr>
+<tr>
+<td>gpMargin</td>
+<td>销售毛利率(%)</td>
+<td>毛利/营业收入*100%=(营业收入-营业成本)/营业收入*100%</td>
+</tr>
+<tr>
+<td>netProfit</td>
+<td>净利润(元)</td>
+<td></td>
+</tr>
+<tr>
+<td>epsTTM</td>
+<td>每股收益</td>
+<td>归属母公司股东的净利润TTM/最新总股本</td>
+</tr>
+<tr>
+<td>MBRevenue</td>
+<td>主营营业收入(元)</td>
+<td></td>
+</tr>
+<tr>
+<td>totalShare</td>
+<td>总股本</td>
+<td></td>
+</tr>
+<tr>
+<td>liqaShare</td>
+<td>流通股本</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<h3>季频营运能力：query_operation_data()</h3>
+<p>方法说明：通过API接口获取季频营运能力信息，可以通过参数设置获取对应年份、季度数据，提供2007年至今数据。</p>
+<p>返回类型：pandas的DataFrame类型。</p>
+<p>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 营运能力
+operation_list = []
+rs_operation = bs.query_operation_data(code="sh.600000", year=2017, quarter=2)
+while (rs_operation.error_code == '0') &amp; rs_operation.next():
+    operation_list.append(rs_operation.get_row_data())
+result_operation = pd.DataFrame(operation_list, columns=rs_operation.fields)
+# 打印输出
+print(result_operation)
+# 结果集输出到csv文件
+result_operation.to_csv("D:\\operation_data.csv", encoding="gbk", index=False)
+
+# 登出系统
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。此参数不可为空；</li>
+<li>year：统计年份，为空时默认当前年；</li>
+<li>quarter：统计季度，为空时默认当前季度。不为空时只有4个取值：1，2，3，4。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>pubDate</th>
+<th>statDate</th>
+<th>NRTurnRatio</th>
+<th>NRTurnDays</th>
+<th>INVTurnRatio</th>
+<th>INVTurnDays</th>
+<th>CATurnRatio</th>
+<th>AssetTurnRatio</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sh.600000</td>
+<td>2017-08-30</td>
+<td>2017-06-30</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>0.014161</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>算法说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>证券代码</td>
+<td></td>
+</tr>
+<tr>
+<td>pubDate</td>
+<td>公司发布财报的日期</td>
+<td></td>
+</tr>
+<tr>
+<td>statDate</td>
+<td>财报统计的季度的最后一天, 比如2017-03-31, 2017-06-30</td>
+<td></td>
+</tr>
+<tr>
+<td>NRTurnRatio</td>
+<td>应收账款周转率(次)</td>
+<td>营业收入/[(期初应收票据及应收账款净额+期末应收票据及应收账款净额)/2]</td>
+</tr>
+<tr>
+<td>NRTurnDays</td>
+<td>应收账款周转天数(天)</td>
+<td>季报天数/应收账款周转率(一季报：90天，中报：180天，三季报：270天，年报：360天)</td>
+</tr>
+<tr>
+<td>INVTurnRatio</td>
+<td>存货周转率(次)</td>
+<td>营业成本/[(期初存货净额+期末存货净额)/2]</td>
+</tr>
+<tr>
+<td>INVTurnDays</td>
+<td>存货周转天数(天)</td>
+<td>季报天数/存货周转率(一季报：90天，中报：180天，三季报：270天，年报：360天)</td>
+</tr>
+<tr>
+<td>CATurnRatio</td>
+<td>流动资产周转率(次)</td>
+<td>营业总收入/[(期初流动资产+期末流动资产)/2]</td>
+</tr>
+<tr>
+<td>AssetTurnRatio</td>
+<td>总资产周转率</td>
+<td>营业总收入/[(期初资产总额+期末资产总额)/2]</td>
+</tr>
+</tbody></table></div>
+<h3>季频成长能力：query_growth_data()</h3>
+<p>方法说明：通过API接口获取季频成长能力信息，可以通过参数设置获取对应年份、季度数据，提供2007年至今数据。<br>返回类型：pandas的DataFrame类型。<br>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 成长能力
+growth_list = []
+rs_growth = bs.query_growth_data(code="sh.600000", year=2017, quarter=2)
+while (rs_growth.error_code == '0') &amp; rs_growth.next():
+    growth_list.append(rs_growth.get_row_data())
+result_growth = pd.DataFrame(growth_list, columns=rs_growth.fields)
+# 打印输出
+print(result_growth)
+# 结果集输出到csv文件
+result_growth.to_csv("D:\\growth_data.csv", encoding="gbk", index=False)
+
+# 登出系统
+bs.logout()
+
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。此参数不可为空；</li>
+<li>year：统计年份，为空时默认当前年；</li>
+<li>quarter：统计季度，为空时默认当前季度。不为空时只有4个取值：1，2，3，4。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>pubDate</th>
+<th>statDate</th>
+<th>YOYEquity</th>
+<th>YOYAsset</th>
+<th>YOYNI</th>
+<th>YOYEPSBasic</th>
+<th>YOYPNI</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sh.600000</td>
+<td>2017-08-30</td>
+<td>2017-06-30</td>
+<td>0.120243</td>
+<td>0.101298</td>
+<td>0.054808</td>
+<td>0.021053</td>
+<td>0.052111</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>算法说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>证券代码</td>
+<td></td>
+</tr>
+<tr>
+<td>pubDate</td>
+<td>公司发布财报的日期</td>
+<td></td>
+</tr>
+<tr>
+<td>statDate</td>
+<td>财报统计的季度的最后一天, 比如2017-03-31, 2017-06-30</td>
+<td></td>
+</tr>
+<tr>
+<td>YOYEquity</td>
+<td>净资产同比增长率</td>
+<td>(本期净资产-上年同期净资产)/上年同期净资产的绝对值*100%</td>
+</tr>
+<tr>
+<td>YOYAsset</td>
+<td>总资产同比增长率</td>
+<td>(本期总资产-上年同期总资产)/上年同期总资产的绝对值*100%</td>
+</tr>
+<tr>
+<td>YOYNI</td>
+<td>净利润同比增长率</td>
+<td>(本期净利润-上年同期净利润)/上年同期净利润的绝对值*100%</td>
+</tr>
+<tr>
+<td>YOYEPSBasic</td>
+<td>基本每股收益同比增长率</td>
+<td>(本期基本每股收益-上年同期基本每股收益)/上年同期基本每股收益的绝对值*100%</td>
+</tr>
+<tr>
+<td>YOYPNI</td>
+<td>归属母公司股东净利润同比增长率</td>
+<td>(本期归属母公司股东净利润-上年同期归属母公司股东净利润)/上年同期归属母公司股东净利润的绝对值*100%</td>
+</tr>
+</tbody></table></div>
+<h3>季频偿债能力：query_balance_data()</h3>
+<p>方法说明：通过API接口获取季频偿债能力信息，可以通过参数设置获取对应年份、季度数据，提供2007年至今数据。<br>返回类型：pandas的DataFrame类型。<br>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 偿债能力
+balance_list = []
+rs_balance = bs.query_balance_data(code="sh.600000", year=2017, quarter=2)
+while (rs_balance.error_code == '0') &amp; rs_balance.next():
+    balance_list.append(rs_balance.get_row_data())
+result_balance = pd.DataFrame(balance_list, columns=rs_balance.fields)
+# 打印输出
+print(result_balance)
+# 结果集输出到csv文件
+result_balance.to_csv("D:\\balance_data.csv", encoding="gbk", index=False)
+
+# 登出系统
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。此参数不可为空；</li>
+<li>year：统计年份，为空时默认当前年；</li>
+<li>quarter：统计季度，为空时默认当前季度。不为空时只有4个取值：1，2，3，4。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>pubDate</th>
+<th>statDate</th>
+<th>currentRatio</th>
+<th>quickRatio</th>
+<th>cashRatio</th>
+<th>YOYLiability</th>
+<th>liabilityToAsset</th>
+<th>assetToEquity</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sh.600000</td>
+<td>2017-08-30</td>
+<td>2017-06-30</td>
+<td></td>
+<td></td>
+<td></td>
+<td>0.100020</td>
+<td>0.933703</td>
+<td>15.083598</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>算法说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>证券代码</td>
+<td></td>
+</tr>
+<tr>
+<td>pubDate</td>
+<td>公司发布财报的日期</td>
+<td></td>
+</tr>
+<tr>
+<td>statDate</td>
+<td>财报统计的季度的最后一天, 比如2017-03-31, 2017-06-30</td>
+<td></td>
+</tr>
+<tr>
+<td>currentRatio</td>
+<td>流动比率</td>
+<td>流动资产/流动负债</td>
+</tr>
+<tr>
+<td>quickRatio</td>
+<td>速动比率</td>
+<td>(流动资产-存货净额)/流动负债</td>
+</tr>
+<tr>
+<td>cashRatio</td>
+<td>现金比率</td>
+<td>(货币资金+交易性金融资产)/流动负债</td>
+</tr>
+<tr>
+<td>YOYLiability</td>
+<td>总负债同比增长率</td>
+<td>(本期总负债-上年同期总负债)/上年同期中负债的绝对值*100%</td>
+</tr>
+<tr>
+<td>liabilityToAsset</td>
+<td>资产负债率</td>
+<td>负债总额/资产总额</td>
+</tr>
+<tr>
+<td>assetToEquity</td>
+<td>权益乘数</td>
+<td>资产总额/股东权益总额=1/(1-资产负债率)</td>
+</tr>
+</tbody></table></div>
+<h3>季频现金流量：query_cash_flow_data()</h3>
+<p>方法说明：通过API接口获取季频现金流量信息，可以通过参数设置获取对应年份、季度数据，提供2007年至今数据。<br>返回类型：pandas的DataFrame类型。<br>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 季频现金流量
+cash_flow_list = []
+rs_cash_flow = bs.query_cash_flow_data(code="sh.600000", year=2017, quarter=2)
+while (rs_cash_flow.error_code == '0') &amp; rs_cash_flow.next():
+    cash_flow_list.append(rs_cash_flow.get_row_data())
+result_cash_flow = pd.DataFrame(cash_flow_list, columns=rs_cash_flow.fields)
+# 打印输出
+print(result_cash_flow)
+# 结果集输出到csv文件
+result_cash_flow.to_csv("D:\\cash_flow_data.csv", encoding="gbk", index=False)
+
+# 登出系统
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。此参数不可为空；</li>
+<li>year：统计年份，为空时默认当前年；</li>
+<li>quarter：统计季度，为空时默认当前季度。不为空时只有4个取值：1，2，3，4。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>pubDate</th>
+<th>statDate</th>
+<th>CAToAsset</th>
+<th>NCAToAsset</th>
+<th>tangibleAssetToAsset</th>
+<th>ebitToInterest</th>
+<th>CFOToOR</th>
+<th>CFOToNP</th>
+<th>CFOToGr</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sh.600000</td>
+<td>2017-08-30</td>
+<td>2017-06-30</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>—3.071550</td>
+<td>—8.976439</td>
+<td>—3.071550</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>算法说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>证券代码</td>
+<td></td>
+</tr>
+<tr>
+<td>pubDate</td>
+<td>公司发布财报的日期</td>
+<td></td>
+</tr>
+<tr>
+<td>statDate</td>
+<td>财报统计的季度的最后一天, 比如2017-03-31, 2017-06-30</td>
+<td></td>
+</tr>
+<tr>
+<td>CAToAsset</td>
+<td>流动资产除以总资产</td>
+<td></td>
+</tr>
+<tr>
+<td>NCAToAsset</td>
+<td>非流动资产除以总资产</td>
+<td></td>
+</tr>
+<tr>
+<td>tangibleAssetToAsset</td>
+<td>有形资产除以总资产</td>
+<td></td>
+</tr>
+<tr>
+<td>ebitToInterest</td>
+<td>已获利息倍数</td>
+<td>息税前利润/利息费用</td>
+</tr>
+<tr>
+<td>CFOToOR</td>
+<td>经营活动产生的现金流量净额除以营业收入</td>
+<td></td>
+</tr>
+<tr>
+<td>CFOToNP</td>
+<td>经营性现金净流量除以净利润</td>
+<td></td>
+</tr>
+<tr>
+<td>CFOToGr</td>
+<td>经营性现金净流量除以营业总收入</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<h3>季频杜邦指数：query_dupont_data()</h3>
+<p>方法说明：通过API接口获取季频杜邦指数信息，可以通过参数设置获取对应年份、季度数据，提供2007年至今数据。<br>返回类型：pandas的DataFrame类型。<br>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 查询杜邦指数
+dupont_list = []
+rs_dupont = bs.query_dupont_data(code="sh.600000", year=2017, quarter=2)
+while (rs_dupont.error_code == '0') &amp; rs_dupont.next():
+    dupont_list.append(rs_dupont.get_row_data())
+result_dupont = pd.DataFrame(dupont_list, columns=rs_dupont.fields)
+# 打印输出
+print(result_dupont)
+# 结果集输出到csv文件
+result_dupont.to_csv("D:\\dupont_data.csv", encoding="gbk", index=False)
+
+# 登出系统
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。此参数不可为空；</li>
+<li>year：统计年份，为空时默认当前年；</li>
+<li>quarter：统计季度，为空时默认当前季度。不为空时只有4个取值：1，2，3，4。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>pubDate</th>
+<th>statDate</th>
+<th>dupontROE</th>
+<th>dupontAssetStoEquity</th>
+<th>dupontAssetTurn</th>
+<th>dupontPnitoni</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sh.600000</td>
+<td>2017-08-30</td>
+<td>2017-06-30</td>
+<td>0.074617</td>
+<td>15.594453</td>
+<td>0.014161</td>
+<td>0.987483</td>
+</tr>
+</tbody></table></div>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>dupontNitogr</th>
+<th>dupontTaxBurden</th>
+<th>dupontIntburden</th>
+<th>dupontEbittogr</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0.342179</td>
+<td>0.776088</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>算法说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>证券代码</td>
+<td></td>
+</tr>
+<tr>
+<td>pubDate</td>
+<td>公司发布财报的日期</td>
+<td></td>
+</tr>
+<tr>
+<td>statDate</td>
+<td>财报统计的季度的最后一天, 比如2017-03-31, 2017-06-30</td>
+<td></td>
+</tr>
+<tr>
+<td>dupontROE</td>
+<td>净资产收益率</td>
+<td>归属母公司股东净利润/[(期初归属母公司股东的权益+期末归属母公司股东的权益)/2]*100%</td>
+</tr>
+<tr>
+<td>dupontAssetStoEquity</td>
+<td>权益乘数，反映企业财务杠杆效应强弱和财务风险</td>
+<td>平均总资产/平均归属于母公司的股东权益</td>
+</tr>
+<tr>
+<td>dupontAssetTurn</td>
+<td>总资产周转率，反映企业资产管理效率的指标</td>
+<td>营业总收入/[(期初资产总额+期末资产总额)/2]</td>
+</tr>
+<tr>
+<td>dupontPnitoni</td>
+<td>归属母公司股东的净利润/净利润，反映母公司控股子公司百分比。如果企业追加投资，扩大持股比例，则本指标会增加。</td>
+<td></td>
+</tr>
+<tr>
+<td>dupontNitogr</td>
+<td>净利润/营业总收入，反映企业销售获利率</td>
+<td></td>
+</tr>
+<tr>
+<td>dupontTaxBurden</td>
+<td>净利润/利润总额，反映企业税负水平，该比值高则税负较低。净利润/利润总额=1-所得税/利润总额</td>
+<td></td>
+</tr>
+<tr>
+<td>dupontIntburden</td>
+<td>利润总额/息税前利润，反映企业利息负担，该比值高则税负较低。利润总额/息税前利润=1-利息费用/息税前利润</td>
+<td></td>
+</tr>
+<tr>
+<td>dupontEbittogr</td>
+<td>息税前利润/营业总收入，反映企业经营利润率，是企业经营获得的可供全体投资人（股东和债权人）分配的盈利占企业全部营收收入的百分比</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<h2>查询季频公司报告信息</h2>
+<h3>季频公司业绩快报：query_performance_express_report()</h3>
+<p>方法说明：通过API接口获取季频公司业绩快报信息，可以通过参数设置获取起止年份数据，提供2006年至今数据。除几种特殊情况外，交易所未要求必须发布。</p>
+<p>返回类型：pandas的DataFrame类型。</p>
+<p>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+#### 登陆系统 ####
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+#### 获取公司业绩快报 ####
+rs = bs.query_performance_express_report("sh.600000", start_date="2015-01-01", end_date="2017-12-31")
+print('query_performance_express_report respond error_code:'+rs.error_code)
+print('query_performance_express_report respond  error_msg:'+rs.error_msg)
+
+result_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    result_list.append(rs.get_row_data())
+    # 获取一条记录，将记录合并在一起
+result = pd.DataFrame(result_list, columns=rs.fields)
+#### 结果集输出到csv文件 ####
+result.to_csv("D:\\performance_express_report.csv", encoding="gbk", index=False)
+print(result)
+
+#### 登出系统 ####
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。此参数不可为空；</li>
+<li>start_date：开始日期，发布日期或更新日期在这个范围内；</li>
+<li>end_date：结束日期，发布日期或更新日期在这个范围内。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>performanceExpPubDate</th>
+<th>performanceExpStatDate</th>
+<th>performanceExpUpdateDate</th>
+<th>performanceExpressTotalAsset</th>
+<th>performanceExpressNetAsset</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sh.600000</td>
+<td>2015-01-06</td>
+<td>2014-12-31</td>
+<td>2015-01-06</td>
+<td>4195602000000.000000</td>
+<td>260011000000.000000</td>
+</tr>
+<tr>
+<td>sh.600000</td>
+<td>2016-01-05</td>
+<td>2015-12-31</td>
+<td>2016-01-05</td>
+<td>5043060000000.000000</td>
+<td>285245000000.000000</td>
+</tr>
+<tr>
+<td>sh.600000</td>
+<td>2017-01-04</td>
+<td>2016-12-31</td>
+<td>2017-01-04</td>
+<td>5857263000000.000000</td>
+<td>338027000000.000000</td>
+</tr>
+</tbody></table></div>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>performanceExpressEPSChgPct</th>
+<th>performanceExpressROEWa</th>
+<th>performanceExpressEPSDiluted</th>
+<th>performanceExpressGRYOY</th>
+<th>performanceExpressOPYOY</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0.326910</td>
+<td>21.020000</td>
+<td>2.520000</td>
+<td>0.228390</td>
+<td>0.153803</td>
+</tr>
+<tr>
+<td>0.191493</td>
+<td>18.820000</td>
+<td>2.660000</td>
+<td>0.192395</td>
+<td>0.069764</td>
+</tr>
+<tr>
+<td>0.115412</td>
+<td>16.350000</td>
+<td>2.400000</td>
+<td>0.097234</td>
+<td>0.054384</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>证券代码</td>
+</tr>
+<tr>
+<td>performanceExpPubDate</td>
+<td>业绩快报披露日</td>
+</tr>
+<tr>
+<td>performanceExpStatDate</td>
+<td>业绩快报统计日期</td>
+</tr>
+<tr>
+<td>performanceExpUpdateDate</td>
+<td>业绩快报披露日(最新)</td>
+</tr>
+<tr>
+<td>performanceExpressTotalAsset</td>
+<td>业绩快报总资产</td>
+</tr>
+<tr>
+<td>performanceExpressNetAsset</td>
+<td>业绩快报净资产</td>
+</tr>
+<tr>
+<td>performanceExpressEPSChgPct</td>
+<td>业绩每股收益增长率</td>
+</tr>
+<tr>
+<td>performanceExpressROEWa</td>
+<td>业绩快报净资产收益率ROE-加权</td>
+</tr>
+<tr>
+<td>performanceExpressEPSDiluted</td>
+<td>业绩快报每股收益EPS-摊薄</td>
+</tr>
+<tr>
+<td>performanceExpressGRYOY</td>
+<td>业绩快报营业总收入同比</td>
+</tr>
+<tr>
+<td>performanceExpressOPYOY</td>
+<td>业绩快报营业利润同比</td>
+</tr>
+</tbody></table></div>
+<h3>季频公司业绩预告：query_forecast_report()</h3>
+<p>方法说明：通过API接口获取季频公司业绩预告信息，可以通过参数设置获取起止年份数据，提供2003年至今数据。除几种特殊情况外，交易所未要求必须发布。</p>
+<p>返回类型：pandas的DataFrame类型。</p>
+<p>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+#### 登陆系统 ####
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+#### 获取公司业绩预告 ####
+rs_forecast = bs.query_forecast_report("sh.600000", start_date="2010-01-01", end_date="2017-12-31")
+print('query_forecast_reprot respond error_code:'+rs_forecast.error_code)
+print('query_forecast_reprot respond  error_msg:'+rs_forecast.error_msg)
+rs_forecast_list = []
+while (rs_forecast.error_code == '0') &amp; rs_forecast.next():
+    # 分页查询，将每页信息合并在一起
+    rs_forecast_list.append(rs_forecast.get_row_data())
+result_forecast = pd.DataFrame(rs_forecast_list, columns=rs_forecast.fields)
+#### 结果集输出到csv文件 ####
+result_forecast.to_csv("D:\\forecast_report.csv", encoding="gbk", index=False)
+print(result_forecast)
+
+#### 登出系统 ####
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。此参数不可为空；</li>
+<li>start_date：开始日期，发布日期或更新日期在这个范围内；</li>
+<li>end_date：结束日期，发布日期或更新日期在这个范围内。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>profitForcastExpPubDate</th>
+<th>profitForcastExpStatDate</th>
+<th>profitForcastType</th>
+<th>profitForcastAbstract</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sh.600000</td>
+<td>2010-01-05</td>
+<td>2009-12-31</td>
+<td>略增</td>
+<td>预计2009年归属于上市公司股东净利润1319500万元，同比增长5.43%。</td>
+</tr>
+<tr>
+<td>sh.600000</td>
+<td>2011-01-05</td>
+<td>2010-12-31</td>
+<td>略增</td>
+<td>预计公司2010年年度归属于上市公司股东净利润为190.76亿元，较上年同期增长44.33％。</td>
+</tr>
+<tr>
+<td>sh.600000</td>
+<td>2012-01-05</td>
+<td>2011-12-31</td>
+<td>略增</td>
+<td>预计2011年1月1日至2011年12月31日，归属于上市公司股东的净利润：盈利272.36亿元，与上年同期相比增加了42.02%。</td>
+</tr>
+</tbody></table></div>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>profitForcastChgPctUp</th>
+<th>profitForcastChgPctDwn</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5.430000</td>
+<td>0.000000</td>
+</tr>
+<tr>
+<td>44.330000</td>
+<td>44.330000</td>
+</tr>
+<tr>
+<td>42.020000</td>
+<td>42.020000</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>证券代码</td>
+</tr>
+<tr>
+<td>profitForcastExpPubDate</td>
+<td>业绩预告发布日期</td>
+</tr>
+<tr>
+<td>profitForcastExpStatDate</td>
+<td>业绩预告统计日期</td>
+</tr>
+<tr>
+<td>profitForcastType</td>
+<td>业绩预告类型</td>
+</tr>
+<tr>
+<td>profitForcastAbstract</td>
+<td>业绩预告摘要</td>
+</tr>
+<tr>
+<td>profitForcastChgPctUp</td>
+<td>预告归属于母公司的净利润增长上限(%)</td>
+</tr>
+<tr>
+<td>profitForcastChgPctDwn</td>
+<td>预告归属于母公司的净利润增长下限(%)</td>
+</tr>
+</tbody></table></div>
+<h2>获取证券元信息</h2>
+<h3>交易日查询：query_trade_dates()</h3>
+<p>方法说明：通过API接口获取股票交易日信息，可以通过参数设置获取起止年份数据，提供上交所1990-今年数据。<br>返回类型：pandas的DataFrame类型。<br>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+#### 登陆系统 ####
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+#### 获取交易日信息 ####
+rs = bs.query_trade_dates(start_date="2017-01-01", end_date="2017-06-30")
+print('query_trade_dates respond error_code:'+rs.error_code)
+print('query_trade_dates respond  error_msg:'+rs.error_msg)
+
+#### 打印结果集 ####
+data_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    data_list.append(rs.get_row_data())
+result = pd.DataFrame(data_list, columns=rs.fields)
+
+#### 结果集输出到csv文件 ####   
+result.to_csv("D:\\trade_datas.csv", encoding="gbk", index=False)
+print(result)
+
+#### 登出系统 ####
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>start_date：开始日期，为空时默认为2015-01-01。</li>
+<li>end_date：结束日期，为空时默认为当前日期。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>calendar_date</th>
+<th>is_trading_day</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2017-01-01</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2017-01-02</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2017-01-03</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>calendar_date</td>
+<td>日期</td>
+</tr>
+<tr>
+<td>is_trading_day</td>
+<td>是否交易日(0:非交易日;1:交易日)</td>
+</tr>
+</tbody></table></div>
+<h3>证券代码查询：query_all_stock()</h3>
+<p>方法说明：获取指定交易日期所有股票列表。通过API接口获取证券代码及股票交易状态信息，与日K线数据同时更新。可以通过参数‘某交易日’获取数据（包括：A股、指数），数据范围同接口query_history_k_data_plus()。</p>
+<p>返回类型：pandas的DataFrame类型。</p>
+<p>更新时间：与日K线同时更新。</p>
+<p>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+#### 登陆系统 ####
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+#### 获取证券信息 ####
+rs = bs.query_all_stock(day="2017-06-30")
+print('query_all_stock respond error_code:'+rs.error_code)
+print('query_all_stock respond  error_msg:'+rs.error_msg)
+
+#### 打印结果集 ####
+data_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    data_list.append(rs.get_row_data())
+result = pd.DataFrame(data_list, columns=rs.fields)
+
+#### 结果集输出到csv文件 ####   
+result.to_csv("D:\\all_stock.csv", encoding="gbk", index=False)
+print(result)
+
+#### 登出系统 ####
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>day：需要查询的交易日期，为空时默认当前日期。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>tradeStatus</th>
+<th>code_name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sh.000001</td>
+<td>1</td>
+<td>上证综合指数</td>
+</tr>
+<tr>
+<td>sh.000002</td>
+<td>1</td>
+<td>上证A股指数</td>
+</tr>
+<tr>
+<td>sh.000003</td>
+<td>1</td>
+<td>上证B股指数</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>证券代码</td>
+</tr>
+<tr>
+<td>tradeStatus</td>
+<td>交易状态(1：正常交易 0：停牌）</td>
+</tr>
+<tr>
+<td>code_name</td>
+<td>证券名称</td>
+</tr>
+</tbody></table></div>
+<h3>证券基本资料：query_stock_basic()</h3>
+<p>方法说明：通过API接口获取证券基本资料，可以通过参数设置获取对应证券代码、证券名称的数据。<br>返回类型：pandas的DataFrame类型。<br>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 获取证券基本资料
+rs = bs.query_stock_basic(code="sh.600000")
+# rs = bs.query_stock_basic(code_name="浦发银行")  # 支持模糊查询
+print('query_stock_basic respond error_code:'+rs.error_code)
+print('query_stock_basic respond  error_msg:'+rs.error_msg)
+
+# 打印结果集
+data_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    data_list.append(rs.get_row_data())
+result = pd.DataFrame(data_list, columns=rs.fields)
+# 结果集输出到csv文件
+result.to_csv("D:/stock_basic.csv", encoding="gbk", index=False)
+print(result)
+
+# 登出系统
+bs.logout()
+
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：A股股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。可以为空；</li>
+<li>code_name：股票名称，支持模糊查询，可以为空。</li>
+<li>当参数为空时，输出全部股票的基本信息。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>code</th>
+<th>code_name</th>
+<th>ipoDate</th>
+<th>outDate</th>
+<th>type</th>
+<th>status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sh.600000</td>
+<td>浦发银行</td>
+<td>1999-11-10</td>
+<td></td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>证券代码</td>
+</tr>
+<tr>
+<td>code_name</td>
+<td>证券名称</td>
+</tr>
+<tr>
+<td>ipoDate</td>
+<td>上市日期</td>
+</tr>
+<tr>
+<td>outDate</td>
+<td>退市日期</td>
+</tr>
+<tr>
+<td>type</td>
+<td>证券类型，其中1：股票，2：指数，3：其它，4：可转债，5：ETF</td>
+</tr>
+<tr>
+<td>status</td>
+<td>上市状态，其中1：上市，0：退市</td>
+</tr>
+</tbody></table></div>
+<h2>宏观经济数据</h2>
+<h3>存款利率：query_deposit_rate_data()</h3>
+<p>方法说明：通过API接口获取存款利率，可以通过参数设置获取对应起止日期的数据。<br>返回类型：pandas的DataFrame类型。<br>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 获取存款利率
+rs = bs.query_deposit_rate_data(start_date="2015-01-01", end_date="2015-12-31")
+print('query_deposit_rate_data respond error_code:'+rs.error_code)
+print('query_deposit_rate_data respond  error_msg:'+rs.error_msg)
+
+# 打印结果集
+data_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    data_list.append(rs.get_row_data())
+result = pd.DataFrame(data_list, columns=rs.fields)
+# 结果集输出到csv文件
+result.to_csv("D:/deposit_rate.csv", encoding="gbk", index=False)
+print(result)
+
+# 登出系统
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>start_date：开始日期，格式XXXX-XX-XX，发布日期在这个范围内，可以为空；</li>
+<li>end_date：结束日期，格式XXXX-XX-XX，发布日期在这个范围内，可以为空。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>pubDate</th>
+<th>demandDepositRate</th>
+<th>fixedDepositRate3Month</th>
+<th>fixedDepositRate6Month</th>
+<th>fixedDepositRate1Year</th>
+<th>fixedDepositRate2Year</th>
+<th>fixedDepositRate3Year</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2015-03-01</td>
+<td>0.350000</td>
+<td>2.100000</td>
+<td>2.300000</td>
+<td>2.500000</td>
+<td>3.100000</td>
+<td>3.750000</td>
+</tr>
+<tr>
+<td>2015-05-11</td>
+<td>0.350000</td>
+<td>1.850000</td>
+<td>2.050000</td>
+<td>2.250000</td>
+<td>2.850000</td>
+<td>3.500000</td>
+</tr>
+</tbody></table></div>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>fixedDepositRate5Year</th>
+<th>installmentFixedDepositRate1Year</th>
+<th>installmentFixedDepositRate3Year</th>
+<th>installmentFixedDepositRate5Year</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>2.100000</td>
+<td>2.300000</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>1.850000</td>
+<td>2.050000</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pubDate</td>
+<td>发布日期</td>
+</tr>
+<tr>
+<td>demandDepositRate</td>
+<td>活期存款(不定期)</td>
+</tr>
+<tr>
+<td>fixedDepositRate3Month</td>
+<td>定期存款(三个月)</td>
+</tr>
+<tr>
+<td>fixedDepositRate6Month</td>
+<td>定期存款(半年)</td>
+</tr>
+<tr>
+<td>fixedDepositRate1Year</td>
+<td>定期存款整存整取(一年)</td>
+</tr>
+<tr>
+<td>fixedDepositRate2Year</td>
+<td>定期存款整存整取(二年)</td>
+</tr>
+<tr>
+<td>fixedDepositRate3Year</td>
+<td>定期存款整存整取(三年)</td>
+</tr>
+<tr>
+<td>fixedDepositRate5Year</td>
+<td>定期存款整存整取(五年)</td>
+</tr>
+<tr>
+<td>installmentFixedDepositRate1Year</td>
+<td>零存整取、整存零取、存本取息定期存款(一年)</td>
+</tr>
+<tr>
+<td>installmentFixedDepositRate3Year</td>
+<td>零存整取、整存零取、存本取息定期存款(三年)</td>
+</tr>
+<tr>
+<td>installmentFixedDepositRate5Year</td>
+<td>零存整取、整存零取、存本取息定期存款(五年)</td>
+</tr>
+</tbody></table></div>
+<h3>贷款利率：query_loan_rate_data()</h3>
+<p>方法说明：通过API接口获取贷款利率，可以通过参数设置获取对应起止日期的数据。<br>返回类型：pandas的DataFrame类型。<br>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 获取贷款利率
+rs = bs.query_loan_rate_data(start_date="2010-01-01", end_date="2015-12-31")
+print('query_loan_rate_data respond error_code:'+rs.error_code)
+print('query_loan_rate_data respond  error_msg:'+rs.error_msg)
+
+# 打印结果集
+data_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    data_list.append(rs.get_row_data())
+result = pd.DataFrame(data_list, columns=rs.fields)
+# 结果集输出到csv文件
+result.to_csv("D:/loan_rate.csv", encoding="gbk", index=False)
+print(result)
+
+# 登出系统
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>start_date：开始日期，格式XXXX-XX-XX，发布日期在这个范围内，可以为空；</li>
+<li>end_date：结束日期，格式XXXX-XX-XX，发布日期在这个范围内，可以为空。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>pubDate</th>
+<th>loanRate6Month</th>
+<th>loanRate6MonthTo1Year</th>
+<th>loanRate1YearTo3Year</th>
+<th>loanRate3YearTo5Year</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2010-10-20</td>
+<td>5.100000</td>
+<td>5.560000</td>
+<td>5.600000</td>
+<td>5.960000</td>
+</tr>
+<tr>
+<td>2010-12-26</td>
+<td>5.350000</td>
+<td>5.810000</td>
+<td>5.850000</td>
+<td>6.220000</td>
+</tr>
+</tbody></table></div>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>loanRateAbove5Year</th>
+<th>mortgateRateBelow5Year</th>
+<th>mortgateRateAbove5Year</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>6.140000</td>
+<td>3.500000</td>
+<td>4.050000</td>
+</tr>
+<tr>
+<td>6.400000</td>
+<td>3.750000</td>
+<td>4.300000</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pubDate</td>
+<td>发布日期</td>
+</tr>
+<tr>
+<td>loanRate6Month</td>
+<td>6个月贷款利率</td>
+</tr>
+<tr>
+<td>loanRate6MonthTo1Year</td>
+<td>6个月至1年贷款利率</td>
+</tr>
+<tr>
+<td>loanRate1YearTo3Year</td>
+<td>1年至3年贷款利率</td>
+</tr>
+<tr>
+<td>loanRate3YearTo5Year</td>
+<td>3年至5年贷款利率</td>
+</tr>
+<tr>
+<td>loanRateAbove5Year</td>
+<td>5年以上贷款利率</td>
+</tr>
+<tr>
+<td>mortgateRateBelow5Year</td>
+<td>5年以下住房公积金贷款利率</td>
+</tr>
+<tr>
+<td>mortgateRateAbove5Year</td>
+<td>5年以上住房公积金贷款利率</td>
+</tr>
+</tbody></table></div>
+<h3>存款准备金率：query_required_reserve_ratio_data()</h3>
+<p>方法说明：通过API接口获取存款准备金率，可以通过参数设置获取对应起止日期的数据。<br>返回类型：pandas的DataFrame类型。<br>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 获取存款准备金率
+rs = bs.query_required_reserve_ratio_data(start_date="2010-01-01", end_date="2015-12-31")
+print('query_required_reserve_ratio_data respond error_code:'+rs.error_code)
+print('query_required_reserve_ratio_data respond  error_msg:'+rs.error_msg)
+
+# 打印结果集
+data_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    data_list.append(rs.get_row_data())
+result = pd.DataFrame(data_list, columns=rs.fields)
+# 结果集输出到csv文件
+result.to_csv("D:/required_reserve_ratio.csv", encoding="gbk", index=False)
+print(result)
+
+# 登出系统
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>start_date：开始日期，格式XXXX-XX-XX，发布日期在这个范围内，可以为空；</li>
+<li>end_date：结束日期，格式XXXX-XX-XX，发布日期在这个范围内，可以为空；</li>
+<li>yearType:年份类别，默认为0，查询公告日期；1查询生效日期。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>pubDate</th>
+<th>effectiveDate</th>
+<th>bigInstitutionsRatioPre</th>
+<th>bigInstitutionsRatioAfter</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2010-01-12</td>
+<td>2010-01-18</td>
+<td>15.5</td>
+<td>16.0</td>
+</tr>
+<tr>
+<td>2010-02-12</td>
+<td>2010-02-25</td>
+<td>16.0</td>
+<td>16.5</td>
+</tr>
+</tbody></table></div>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>mediumInstitutionsRatioPre</th>
+<th>mediumInstitutionsRatioAfter</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>13.5</td>
+<td>14.0</td>
+</tr>
+<tr>
+<td>14.0</td>
+<td>14.5</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pubDate</td>
+<td>公告日期</td>
+</tr>
+<tr>
+<td>effectiveDate</td>
+<td>生效日期</td>
+</tr>
+<tr>
+<td>bigInstitutionsRatioPre</td>
+<td>人民币存款准备金率：大型存款类金融机构 调整前</td>
+</tr>
+<tr>
+<td>bigInstitutionsRatioAfter</td>
+<td>人民币存款准备金率：大型存款类金融机构 调整后</td>
+</tr>
+<tr>
+<td>mediumInstitutionsRatioPre</td>
+<td>人民币存款准备金率：中小型存款类金融机构 调整前</td>
+</tr>
+<tr>
+<td>mediumInstitutionsRatioAfter</td>
+<td>人民币存款准备金率：中小型存款类金融机构 调整后</td>
+</tr>
+</tbody></table></div>
+<h3>货币供应量：query_money_supply_data_month()</h3>
+<p>方法说明：通过API接口获取货币供应量，可以通过参数设置获取对应起止日期的数据。<br>返回类型：pandas的DataFrame类型。<br>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 获取货币供应量
+rs = bs.query_money_supply_data_month(start_date="2010-01", end_date="2015-12")
+print('query_money_supply_data_month respond error_code:'+rs.error_code)
+print('query_money_supply_data_month respond  error_msg:'+rs.error_msg)
+
+# 打印结果集
+data_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    data_list.append(rs.get_row_data())
+result = pd.DataFrame(data_list, columns=rs.fields)
+# 结果集输出到csv文件
+result.to_csv("D:/money_supply_data_month.csv", encoding="gbk", index=False)
+print(result)
+
+# 登出系统
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>start_date：开始日期，格式XXXX-XX，发布日期在这个范围内，可以为空；</li>
+<li>end_date：结束日期，格式XXXX-XX，发布日期在这个范围内，可以为空。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>statYear</th>
+<th>statMonth</th>
+<th>m0Month</th>
+<th>m0YOY</th>
+<th>m0ChainRelative</th>
+<th>m1Month</th>
+<th>m1YOY</th>
+<th>m1ChainRelative</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2010</td>
+<td>01</td>
+<td>40758.580000</td>
+<td>—0.790000</td>
+<td>6.566809</td>
+<td>229588.980000</td>
+<td>38.960000</td>
+<td>3.677276</td>
+</tr>
+<tr>
+<td>2010</td>
+<td>02</td>
+<td>42865.790000</td>
+<td>21.980000</td>
+<td>5.169979</td>
+<td>224286.950000</td>
+<td>34.990000</td>
+<td>—2.309357</td>
+</tr>
+</tbody></table></div>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>m2Month</th>
+<th>m2YOY</th>
+<th>m2ChainRelative</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>625609.290000</td>
+<td>25.980000</td>
+<td>2.521165</td>
+</tr>
+<tr>
+<td>636072.260000</td>
+<td>25.520000</td>
+<td>1.672445</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>statYear</td>
+<td>统计年度</td>
+</tr>
+<tr>
+<td>statMonth</td>
+<td>统计月份</td>
+</tr>
+<tr>
+<td>m0Month</td>
+<td>货币供应量M0（月）</td>
+</tr>
+<tr>
+<td>m0YOY</td>
+<td>货币供应量M0（同比）</td>
+</tr>
+<tr>
+<td>m0ChainRelative</td>
+<td>货币供应量M0（环比）</td>
+</tr>
+<tr>
+<td>m1Month</td>
+<td>货币供应量M1（月）</td>
+</tr>
+<tr>
+<td>m1YOY</td>
+<td>货币供应量M1（同比）</td>
+</tr>
+<tr>
+<td>m1ChainRelative</td>
+<td>货币供应量M1（环比）</td>
+</tr>
+<tr>
+<td>m2Month</td>
+<td>货币供应量M2（月）</td>
+</tr>
+<tr>
+<td>m2YOY</td>
+<td>货币供应量M2（同比）</td>
+</tr>
+<tr>
+<td>m2ChainRelative</td>
+<td>货币供应量M2（环比）</td>
+</tr>
+</tbody></table></div>
+<h3>货币供应量(年底余额)：query_money_supply_data_year()</h3>
+<p>方法说明：通过API接口获取货币供应量(年底余额)，可以通过参数设置获取对应起止日期的数据。<br>返回类型：pandas的DataFrame类型。<br>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 获取货币供应量(年底余额)
+rs = bs.query_money_supply_data_year(start_date="2010", end_date="2015")
+print('query_money_supply_data_year respond error_code:'+rs.error_code)
+print('query_money_supply_data_year respond  error_msg:'+rs.error_msg)
+
+# 打印结果集
+data_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    data_list.append(rs.get_row_data())
+result = pd.DataFrame(data_list, columns=rs.fields)
+# 结果集输出到csv文件
+result.to_csv("D:/money_supply_data_year.csv", encoding="gbk", index=False)
+print(result)
+
+# 登出系统
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>start_date：开始日期，格式XXXX，发布日期在这个范围内，可以为空；</li>
+<li>end_date：结束日期，格式XXXX，发布日期在这个范围内，可以为空。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>statYear</th>
+<th>m0Year</th>
+<th>m0YearYOY</th>
+<th>m1Year</th>
+<th>m1YearYOY</th>
+<th>m2Year</th>
+<th>m2YearYOY</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2010</td>
+<td>44628.170000</td>
+<td>16.700000</td>
+<td>266621.540000</td>
+<td>21.200000</td>
+<td>725851.800000</td>
+<td>19.700000</td>
+</tr>
+<tr>
+<td>2011</td>
+<td>50748.460000</td>
+<td>13.760000</td>
+<td>289847.700000</td>
+<td>7.850000</td>
+<td>851590.900000</td>
+<td>13.610000</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>statYear</td>
+<td>统计年度</td>
+</tr>
+<tr>
+<td>m0Year</td>
+<td>年货币供应量M0（亿元）</td>
+</tr>
+<tr>
+<td>m0YearYOY</td>
+<td>年货币供应量M0（同比）</td>
+</tr>
+<tr>
+<td>m1Year</td>
+<td>年货币供应量M1（亿元）</td>
+</tr>
+<tr>
+<td>m1YearYOY</td>
+<td>年货币供应量M1（同比）</td>
+</tr>
+<tr>
+<td>m2Year</td>
+<td>年货币供应量M2（亿元）</td>
+</tr>
+<tr>
+<td>m2YearYOY</td>
+<td>年货币供应量M2（同比）</td>
+</tr>
+</tbody></table></div>
+<h3>银行间同业拆放利率：query_shibor_data()</h3>
+<p>方法说明：通过API接口获取银行间同业拆放利率，可以通过参数设置获取对应起止日期的数据。<br>返回类型：pandas的DataFrame类型。<br>使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 获取银行间同业拆放利率
+rs = bs.query_shibor_data(start_date="2015-01-01", end_date="2015-12-31")
+print('query_shibor_data respond error_code:'+rs.error_code)
+print('query_shibor_data respond  error_msg:'+rs.error_msg)
+
+# 打印结果集
+data_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    data_list.append(rs.get_row_data())
+result = pd.DataFrame(data_list, columns=rs.fields)
+# 结果集输出到csv文件
+result.to_csv("D:/shibor_data.csv", encoding="gbk", index=False)
+print(result)
+
+# 登出系统
+bs.logout()
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>start_date：开始日期，格式XXXX-XX-XX，发布日期在这个范围内，可以为空；</li>
+<li>end_date：结束日期，格式XXXX-XX-XX，发布日期在这个范围内，可以为空。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>date</th>
+<th>shiborON</th>
+<th>shibor1W</th>
+<th>shibor2W</th>
+<th>shibor1M</th>
+<th>shibor3M</th>
+<th>shibor6M</th>
+<th>shibor9M</th>
+<th>shibor1Y</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2015-01-04</td>
+<td>3.640000</td>
+<td>4.883000</td>
+<td>5.794000</td>
+<td>5.629000</td>
+<td>5.138000</td>
+<td>4.753700</td>
+<td>4.624600</td>
+<td>4.738500</td>
+</tr>
+<tr>
+<td>2015-01-05</td>
+<td>3.421000</td>
+<td>4.725000</td>
+<td>5.665000</td>
+<td>5.364000</td>
+<td>5.125000</td>
+<td>4.747800</td>
+<td>4.627600</td>
+<td>4.742900</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>date</td>
+<td>日期</td>
+</tr>
+<tr>
+<td>shiborON</td>
+<td>隔夜拆借利率</td>
+</tr>
+<tr>
+<td>shibor1W</td>
+<td>1周拆放利率</td>
+</tr>
+<tr>
+<td>shibor2W</td>
+<td>2周拆放利率</td>
+</tr>
+<tr>
+<td>shibor1M</td>
+<td>1个月拆放利率</td>
+</tr>
+<tr>
+<td>shibor3M</td>
+<td>3个月拆放利率</td>
+</tr>
+<tr>
+<td>shibor6M</td>
+<td>6个月拆放利率</td>
+</tr>
+<tr>
+<td>shibor9M</td>
+<td>9个月拆放利率</td>
+</tr>
+<tr>
+<td>shibor1Y</td>
+<td>1年拆放利率</td>
+</tr>
+</tbody></table></div>
+<h2>板块数据</h2>
+<h3>行业分类：query_stock_industry()</h3>
+<p>方法说明：通过API接口获取行业分类信息，更新频率：每周一更新。返回类型：pandas的DataFrame类型。 使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 获取行业分类数据
+rs = bs.query_stock_industry()
+# rs = bs.query_stock_basic(code_name="浦发银行")
+print('query_stock_industry error_code:'+rs.error_code)
+print('query_stock_industry respond  error_msg:'+rs.error_msg)
+
+# 打印结果集
+industry_list = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    industry_list.append(rs.get_row_data())
+result = pd.DataFrame(industry_list, columns=rs.fields)
+# 结果集输出到csv文件
+result.to_csv("D:/stock_industry.csv", encoding="gbk", index=False)
+print(result)
+
+# 登出系统
+bs.logout()
+
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>code：A股股票代码，sh或sz.+6位数字代码，或者指数代码，如：sh.601398。sh：上海；sz：深圳。可以为空；</li>
+<li>date：查询日期，格式XXXX-XX-XX，为空时默认最新日期。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>updateDate</th>
+<th>code</th>
+<th>code_name</th>
+<th>industry</th>
+<th>industryClassification</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2018-11-26</td>
+<td>sh.600000</td>
+<td>浦发银行</td>
+<td>银行</td>
+<td>申万一级行业</td>
+</tr>
+<tr>
+<td>2018-11-26</td>
+<td>sh.600001</td>
+<td>邯郸钢铁</td>
+<td></td>
+<td>申万一级行业</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>updateDate</td>
+<td>更新日期</td>
+</tr>
+<tr>
+<td>code</td>
+<td>证券代码</td>
+</tr>
+<tr>
+<td>code_name</td>
+<td>证券名称</td>
+</tr>
+<tr>
+<td>industry</td>
+<td>所属行业</td>
+</tr>
+<tr>
+<td>industryClassification</td>
+<td>所属行业类别</td>
+</tr>
+</tbody></table></div>
+<h3>上证50成分股：query_sz50_stocks()</h3>
+<p>方法说明：通过API接口获取上证50成分股信息，更新频率：每周一更新。返回类型：pandas的DataFrame类型。 使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 获取上证50成分股
+rs = bs.query_sz50_stocks()
+print('query_sz50 error_code:'+rs.error_code)
+print('query_sz50  error_msg:'+rs.error_msg)
+
+# 打印结果集
+sz50_stocks = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    sz50_stocks.append(rs.get_row_data())
+result = pd.DataFrame(sz50_stocks, columns=rs.fields)
+# 结果集输出到csv文件
+result.to_csv("D:/sz50_stocks.csv", encoding="gbk", index=False)
+print(result)
+
+# 登出系统
+bs.logout()
+
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>date：查询日期，格式XXXX-XX-XX，为空时默认最新日期。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>updateDate</th>
+<th>code</th>
+<th>code_name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2018-11-26</td>
+<td>sh.600000</td>
+<td>浦发银行</td>
+</tr>
+<tr>
+<td>2018-11-26</td>
+<td>sh.600016</td>
+<td>民生银行</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>updateDate</td>
+<td>更新日期</td>
+</tr>
+<tr>
+<td>code</td>
+<td>证券代码</td>
+</tr>
+<tr>
+<td>code_name</td>
+<td>证券名称</td>
+</tr>
+</tbody></table></div>
+<h3>沪深300成分股：query_hs300_stocks()</h3>
+<p>方法说明：通过API接口获取沪深300成分股信息，更新频率：每周一更新。返回类型：pandas的DataFrame类型。 使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 获取沪深300成分股
+rs = bs.query_hs300_stocks()
+print('query_hs300 error_code:'+rs.error_code)
+print('query_hs300  error_msg:'+rs.error_msg)
+
+# 打印结果集
+hs300_stocks = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    hs300_stocks.append(rs.get_row_data())
+result = pd.DataFrame(hs300_stocks, columns=rs.fields)
+# 结果集输出到csv文件
+result.to_csv("D:/hs300_stocks.csv", encoding="gbk", index=False)
+print(result)
+
+# 登出系统
+bs.logout()
+
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>date：查询日期，格式XXXX-XX-XX，为空时默认最新日期。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>updateDate</th>
+<th>code</th>
+<th>code_name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2018-11-26</td>
+<td>sh.600000</td>
+<td>浦发银行</td>
+</tr>
+<tr>
+<td>2018-11-26</td>
+<td>sh.600008</td>
+<td>首创股份</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>updateDate</td>
+<td>更新日期</td>
+</tr>
+<tr>
+<td>code</td>
+<td>证券代码</td>
+</tr>
+<tr>
+<td>code_name</td>
+<td>证券名称</td>
+</tr>
+</tbody></table></div>
+<h3>中证500成分股：query_zz500_stocks()</h3>
+<p>方法说明：通过API接口获取中证500成分股信息，更新频率：每周一更新。返回类型：pandas的DataFrame类型。 使用示例</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+# 登陆系统
+lg = bs.login()
+# 显示登陆返回信息
+print('login respond error_code:'+lg.error_code)
+print('login respond  error_msg:'+lg.error_msg)
+
+# 获取中证500成分股
+rs = bs.query_zz500_stocks()
+print('query_zz500 error_code:'+rs.error_code)
+print('query_zz500  error_msg:'+rs.error_msg)
+
+# 打印结果集
+zz500_stocks = []
+while (rs.error_code == '0') &amp; rs.next():
+    # 获取一条记录，将记录合并在一起
+    zz500_stocks.append(rs.get_row_data())
+result = pd.DataFrame(zz500_stocks, columns=rs.fields)
+# 结果集输出到csv文件
+result.to_csv("D:/zz500_stocks.csv", encoding="gbk", index=False)
+print(result)
+
+# 登出系统
+bs.logout()
+
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>date：查询日期，格式XXXX-XX-XX，为空时默认最新日期。</li>
+</ul>
+<p>返回示例数据</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>updateDate</th>
+<th>code</th>
+<th>code_name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2018-11-26</td>
+<td>sh.600004</td>
+<td>白云机场</td>
+</tr>
+<tr>
+<td>2018-11-26</td>
+<td>sh.600006</td>
+<td>东风汽车</td>
+</tr>
+</tbody></table></div>
+<p>返回数据说明</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>updateDate</td>
+<td>更新日期</td>
+</tr>
+<tr>
+<td>code</td>
+<td>证券代码</td>
+</tr>
+<tr>
+<td>code_name</td>
+<td>证券名称</td>
+</tr>
+</tbody></table></div>
+<h2>示例程序</h2>
+<h3>获取指定日期全部股票的日K线数据</h3>
+<p>示例代码如下：</p>
+<pre><code>
+import baostock as bs
+import pandas as pd
+
+
+def download_data(date):
+    bs.login()
+
+    # 获取指定日期的指数、股票数据
+    stock_rs = bs.query_all_stock(date)
+    stock_df = stock_rs.get_data()
+    data_df = pd.DataFrame()
+    for code in stock_df["code"]:
+        print("Downloading&nbsp;:" + code)
+        k_rs = bs.query_history_k_data_plus(code, "date,code,open,high,low,close", date, date)
+        data_df = data_df.append(k_rs.get_data())
+    bs.logout()
+    data_df.to_csv("D:\\demo_assignDayData.csv", encoding="gbk", index=False)
+    print(data_df)
+
+
+if __name__ == '__main__':
+    # 获取指定日期全部股票的日K线数据
+    download_data("2019-02-25")
+</code></pre>
+</div></div></div><div data-v-645ad045="" class="content-ad"><a data-v-645ad045="" href="http://www.baostock.com/mainContent?file=pythonAPI.md#" class="content-ad-link"><img data-v-645ad045="" src="./www.baostock.com_files/content.png" alt="" class="content-ad-image full-height"><!----></a></div></div></div></div><footer data-v-9accd2bf="" class="app-footer"><div data-v-9accd2bf="" class="footer-content"><p data-v-9accd2bf=""><a data-v-9accd2bf="" href="https://beian.miit.gov.cn/">沪ICP备17057350号。</a></p><p data-v-9accd2bf=""><a data-v-9accd2bf="" href="http://www.baostock.com/mainContent?file=pythonAPI.md#">隐私政策</a><span data-v-9accd2bf="" class="link-spacer"></span><a data-v-9accd2bf="" href="http://www.baostock.com/mainContent?file=pythonAPI.md#">关于www.baostock.com</a><span data-v-9accd2bf="" class="link-spacer"></span><a data-v-9accd2bf="" href="http://www.baostock.com/mainContent?file=pythonAPI.md#">免责声明</a></p></div><img data-v-9accd2bf="" src="./www.baostock.com_files/wiki.png" alt="Wiki" class="footer-wiki-icon"></footer></div></div>
+    <script>
+        // 检查是否已经点击过广告Logo
+        const adLogoShown = sessionStorage.getItem('adLogoShown');
+        
+        // 获取广告配置
+        async function loadAdConfig() {
+          // 如果已经点击过广告Logo，则不再显示广告
+          if (adLogoShown) {
+            console.log("adLogoShown - skipping ad display");
+            return;
+          }
+          
+          try {
+            const response = await fetch('api/ad-config');
+            const adItems = await response.json();
+            console.log('Ad Items:', adItems)
+            // 查找状态为on且位置为logo的广告
+            const logoAd = adItems.find(ad => 
+              ad.status === 'on' && 
+              ad.position === 'logo' &&
+              isAdValid(ad)
+            );
+            console.log("logoAd",logoAd);
+            if (logoAd) {
+              showAd(logoAd);
+            }
+          } catch (error) {
+            console.error('Failed to load ad config:', error);
+            // 如果API请求失败，显示模拟广告
+            showMockAd();
+          }
+        }
+
+        // 检查广告是否在有效期内
+        function isAdValid(ad) {
+          const now = new Date();
+          const startDate = new Date(ad.startDate);
+          const endDate = new Date(ad.endDate);
+          console.log("startDate",startDate);
+          console.log("endDate",endDate);
+          console.log("now",now);
+          return now >= startDate && now <= endDate;
+        }
+        
+        // 显示模拟广告（当API不可用时）
+        function showMockAd() {
+          // 如果已经点击过广告Logo，则不再显示广告
+          if (sessionStorage.getItem('adLogoShown')) {
+            return;
+          }
+          
+          // 模拟广告数据
+          const ad = {
+            title: 'baostock 开源金融数据平台',
+            description: '专业的金融数据服务',
+            imageUrl: 'https://www.baostock.com/images/logo.png',
+            duration: 30 // 广告显示时长，单位为秒
+          };
+          
+          // 调用显示广告的函数
+          showAd(ad);
+        }
+
+      // 全局函数，用于处理广告点击导航
+      function showAdContent(fileName) {
+        const overlay = document.getElementById('adOverlay');
+        // 隐藏广告
+        overlay.style.display = 'none';
+        
+        // 导航到mainContent并显示指定的markdown文件
+        window.location.href = '/mainContent?file=' + fileName;
+      }
+
+      function showAd(ad) {
+        const overlay = document.getElementById('adOverlay');
+        const adContainer = document.getElementById('adContainer');
+        sessionStorage.setItem('adLogoShown', 'true');
+        
+        // 判断是否需要显示标题和描述
+        const hasText = ad.title && ad.description;
+        
+        // 构建广告HTML，根据是否有文本内容调整结构
+        let adHtml = '';
+        
+        if (!hasText) {
+          // 如果没有标题和描述，图片填充整个空间
+          adHtml = `
+            <a href="javascript:void(0);" onclick="showAdContent('registerAccount.md');" style="display: block;">
+              <img src="${ad.imageUrl}" alt="${ad.title || 'Advertisement'}" class="ad-image full-size">
+            </a>
+          `;
+        } else {
+          // 如果有标题和/或描述，正常显示
+          adHtml = `
+            <div class="ad-text-container">
+              ${ad.title ? `<div class="ad-title">${ad.title}</div>` : ''}
+              ${ad.description ? `<div class="ad-description">${ad.description}</div>` : ''}
+            </div>
+            <a href="javascript:void(0);" onclick="showAdContent('registerAccount.md');" style="display: block;">
+              <img src="${ad.imageUrl}" alt="${ad.title || 'Advertisement'}" class="ad-image">
+            </a>
+          `;
+        }
+        
+        // 显示广告
+        overlay.style.display = 'flex';
+        adContainer.innerHTML = adHtml;
+        
+        // 设置关闭按钮事件
+        document.getElementById('closeAd').onclick = () => {
+          overlay.style.display = 'none';
+        };
+        
+        // 设置自动关闭（duration单位为秒，需要转换为毫秒）
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, ad.duration * 1000);
+      }
+
+      // 页面加载完成后加载广告配置
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          loadAdConfig();
+        }, 1000); // 1秒后尝试加载广告
+      });
+    </script>
+  
+
+</body></html>
