@@ -102,6 +102,41 @@ def get_stock_list():
     # If no file exists, refresh from API
     return refresh_stock_list()
 
+def update_stock_list_with_industry(industry_df):
+    """Update stock_list.csv with industry information"""
+    try:
+        # Load current stock list
+        if os.path.exists(STOCK_LIST_FILE):
+            stock_df = pd.read_csv(STOCK_LIST_FILE, encoding='utf-8-sig')
+        else:
+            st.error("Stock list file not found. Please refresh stock list first.")
+            return False
+        
+        # Select relevant columns from industry data
+        industry_cols = ['code', 'industry', 'industryClassification']
+        industry_data = industry_df[industry_cols].copy()
+        
+        # Merge industry information into stock list
+        # First, remove existing industry columns if they exist
+        if 'industry' in stock_df.columns:
+            stock_df = stock_df.drop(columns=['industry'])
+        if 'industryClassification' in stock_df.columns:
+            stock_df = stock_df.drop(columns=['industryClassification'])
+        
+        # Merge on 'code' column
+        updated_df = stock_df.merge(industry_data, on='code', how='left')
+        
+        # Save updated data back to CSV
+        updated_df.to_csv(STOCK_LIST_FILE, index=False, encoding='utf-8-sig')
+        
+        # Update session state
+        st.session_state.stock_list = updated_df
+        
+        return True
+    except Exception as e:
+        st.error(f"Failed to update stock list with industry data: {e}")
+        return False
+
 def load_field_descriptions():
     """Load field descriptions from CSV file"""
     if st.session_state.field_descriptions is None:
@@ -402,6 +437,7 @@ with col1:
                             df = result_to_dataframe(rs)
                             st.session_state.result_df = df
                             st.session_state.query_info = f"K-Line Data: {code}"
+                            st.session_state.is_industry_data = False
                         else:
                             st.error(f"Query failed: {rs.error_msg}")
     
@@ -632,8 +668,29 @@ with col1:
                             df = result_to_dataframe(rs)
                             st.session_state.result_df = df
                             st.session_state.query_info = "Stock Industry"
+                            # Mark that this is industry data for save button
+                            st.session_state.is_industry_data = True
                         else:
                             st.error(f"Query failed: {rs.error_msg}")
+            
+            # Add save button for industry data
+            st.markdown("---")
+            st.markdown("### 💾 Save Industry Data")
+            st.info("💡 Click the button below to save/update industry information to local stock_list.csv")
+            
+            if st.button("💾 Save Industry Data to stock_list.csv", type="secondary", use_container_width=True):
+                if 'result_df' in st.session_state and not st.session_state.result_df.empty:
+                    if 'is_industry_data' in st.session_state and st.session_state.is_industry_data:
+                        with st.spinner("Updating stock_list.csv with industry data..."):
+                            if update_stock_list_with_industry(st.session_state.result_df):
+                                st.success("✅ Successfully updated stock_list.csv with industry information!")
+                                st.balloons()
+                            else:
+                                st.error("❌ Failed to update stock_list.csv")
+                    else:
+                        st.warning("⚠️ Current data is not industry data. Please query industry data first.")
+                else:
+                    st.warning("⚠️ No industry data to save. Please execute query first.")
         else:
             date_input = st.date_input("Query Date", value=datetime.now())
             
@@ -665,14 +722,30 @@ with col2:
         # Display dataframe with tooltips
         display_dataframe_with_tooltips(st.session_state.result_df, api_category)
         
-        # Download button
-        csv = st.session_state.result_df.to_csv(index=False).encode('utf-8-sig')
-        st.download_button(
-            label="Download CSV",
-            data=csv,
-            file_name=f"baostock_data_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
-            mime="text/csv"
-        )
+        # Action buttons
+        col_download, col_save = st.columns([1, 1])
+        
+        with col_download:
+            # Download button
+            csv = st.session_state.result_df.to_csv(index=False).encode('utf-8-sig')
+            st.download_button(
+                label="📥 Download CSV",
+                data=csv,
+                file_name=f"baostock_data_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                mime="text/csv",
+                use_container_width=True
+            )
+        
+        with col_save:
+            # Save industry data button (only show for industry data)
+            if 'is_industry_data' in st.session_state and st.session_state.is_industry_data:
+                if st.button("💾 Save to stock_list.csv", use_container_width=True, type="secondary"):
+                    with st.spinner("Updating stock_list.csv..."):
+                        if update_stock_list_with_industry(st.session_state.result_df):
+                            st.success("✅ Successfully updated stock_list.csv!")
+                            st.balloons()
+                        else:
+                            st.error("❌ Failed to update stock_list.csv")
         
         # Show basic statistics for numeric columns
         numeric_cols = st.session_state.result_df.select_dtypes(include=['float64', 'int64']).columns

@@ -12,10 +12,16 @@ A comprehensive web-based tool for querying BaoStock API data with an intuitive 
   - First-time use automatically fetches complete stock list from API
 - **📖 Field Description Tooltips**:
   - All query result table fields have detailed Chinese descriptions
+  - Hover over column names to view detailed field descriptions
   - Click "View Field Descriptions" to expand and view all field meanings
   - Includes field descriptions, calculation formulas, units, and other detailed information
   - Field definitions saved in local CSV file (field_descriptions.csv)
   - Support custom extension of field descriptions
+- **💾 Industry Data Management**:
+  - Query industry classification for all stocks
+  - One-click save industry data to local stock_list.csv
+  - Auto-merge and update industry fields (industry, industryClassification)
+  - Support incremental updates without affecting existing data
 - **K-Line Data**: Query historical stock K-line data (daily, weekly, monthly, and minute-level)
 - **Dividend & Adjustment**: Get dividend information and adjustment factors
 - **Financial Data**: Query quarterly financial statements including:  - Profitability metrics
